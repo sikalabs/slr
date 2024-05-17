@@ -1,4 +1,4 @@
-# slr
+# slr: SikaLabs Random Utils
 
 ## Install
 
