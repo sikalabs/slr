@@ -1,9 +1,12 @@
 module github.com/sikalabs/slr
 
-go 1.21
+go 1.21.6
+
+toolchain go1.22.3
 
 require (
 	github.com/go-redis/redis/v8 v8.11.5
+	github.com/mlosinsky/clisso/ssoclient v0.3.2
 	github.com/spf13/cobra v1.8.0
 )
 
