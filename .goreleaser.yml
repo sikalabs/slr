@@ -74,7 +74,7 @@ dockers:
       goos: linux
       goarch: amd64
       image_templates:
-        - "sikalabs/slr:{{ .Tag }}"
+        - "ghcr.io/sikalabs/slr:{{ .Tag }}"
       dockerfile: Dockerfile.goreleaser
       ids:
         - slr
@@ -93,7 +93,7 @@ dockers:
     - goos: linux
       goarch: arm64
       image_templates:
-        - "sikalabs/slr:{{ .Tag }}-arm64v8"
+        - "ghcr.io/sikalabs/slr:{{ .Tag }}-arm64v8"
       dockerfile: Dockerfile.goreleaser.arm64v8
       ids:
         - slr
