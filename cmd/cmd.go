@@ -2,6 +2,7 @@ package cmd
 
 import (
 	_ "github.com/sikalabs/slr/cmd/dela"
+	_ "github.com/sikalabs/slr/cmd/example"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	"github.com/sikalabs/slr/cmd/root"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
