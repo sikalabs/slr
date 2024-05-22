@@ -18,6 +18,12 @@ Using [slu](https://github.com/sikalabs/slu)
 slu install-bin slr
 ```
 
+Install on Mac
+
+```
+brew install sikalabs/tap/slr
+```
+
 ## Contributing
 
 You can create new command from [cmd/example](./cmd/example/example.go).
