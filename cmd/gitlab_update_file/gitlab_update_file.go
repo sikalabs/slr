@@ -106,6 +106,10 @@ func init() {
 }
 
 func gitlabUpdateFile(gitlabUrl, token string, projectId int, branch, file, content, email, name, message string) {
+	rawGitlabUpdateFile(gitlabUrl, token, projectId, branch, file, content, email, name, message)
+}
+
+func rawGitlabUpdateFile(gitlabUrl, token string, projectId int, branch, file, content, email, name, message string) {
 	url := fmt.Sprintf("%s/api/v4/projects/%d/repository/files/%s", gitlabUrl, projectId, url.QueryEscape(file))
 	jsonData := `{
 		"branch": "` + branch + `",
