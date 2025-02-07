@@ -24,6 +24,12 @@ Install on Mac
 brew install sikalabs/tap/slr
 ```
 
+Install on Windows unsing [scoop](https://scoop.sh/)
+
+```
+scoop install https://raw.githubusercontent.com/sikalabs/scoop-bucket/master/slr.json
+```
+
 ## Contributing
 
 You can create new command from [cmd/example](./cmd/example/example.go).
