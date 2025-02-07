@@ -109,3 +109,12 @@ dockers:
         - "--label=com.github.actions.name={{.ProjectName}}"
         - "--label=repository=https://github.com/sikalabs/slr"
         - "--label=maintainer=SikaLabs Opensource &lt;opensource@sikalabs.com&gt;"
+
+scoops:
+  -
+    repository:
+      owner: sikalabs
+      name: scoop-bucket
+    homepage:  https://github.com/sikalabs/slr
+    description: SikaLabs Random Utils
+    license: MIT
