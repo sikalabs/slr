@@ -16,6 +16,7 @@ import (
 
 var FlagVaultAddr string
 var FlagVaultSecretPath string
+var FlagLoginOIDC bool
 
 var Cmd = &cobra.Command{
 	Use:   "kubeconfig-from-vault",
@@ -43,6 +44,12 @@ func init() {
 		"Vault Secret Path",
 	)
 	Cmd.MarkFlagRequired("path")
+	Cmd.Flags().BoolVar(
+		&FlagLoginOIDC,
+		"login-oidc",
+		false,
+		"Vault Login with OIDC",
+	)
 }
 
 func kubeconfigFromVault(vaultAddr, secretPath string) {
@@ -55,6 +62,10 @@ func kubeconfigFromVault(vaultAddr, secretPath string) {
 	KUBERNETES_TOKEN := data["KUBERNETES_TOKEN"]
 
 	caFilePath := createTmpFile(KUBERNETES_CA)
+
+	if FlagLoginOIDC {
+		sh([]string{"vault", "login", "-address", vaultAddr, "-method=oidc"})
+	}
 
 	sh([]string{"kubectl", "config", "set-cluster", KUBERNETES_CLUSTER_NAME, "--server=" + KUBERNETES_SERVER, "--certificate-authority=" + caFilePath, "--embed-certs=true"})
 	sh([]string{"kubectl", "config", "set-credentials", KUBERNETES_CLUSTER_NAME, "--token=" + KUBERNETES_TOKEN})
