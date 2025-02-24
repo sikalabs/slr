@@ -7,6 +7,7 @@ toolchain go1.22.3
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible
 	github.com/go-redis/redis/v8 v8.11.5
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/hashicorp/vault/api v1.15.0
 	github.com/mlosinsky/clisso/ssoclient v0.3.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
@@ -17,11 +18,9 @@ require (
 
 require (
 	github.com/aybabtme/rgbterm v0.0.0-20170906152045-cc83f3b3ce59 // indirect
-	github.com/cenkalti/backoff/v3 v3.0.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/go-jose/go-jose/v4 v4.0.1 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
