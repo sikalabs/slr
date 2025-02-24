@@ -9,6 +9,7 @@
 *.log
 *.backup
 *.local.txt
+*.local.sh
 
 # Go
 slr
