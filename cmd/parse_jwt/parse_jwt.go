@@ -16,7 +16,8 @@ var Cmd = &cobra.Command{
 	Use:   "parse-jwt",
 	Short: "Parse JWT from stdin into JSON list of 3 objects (Header, Payload, Signature)",
 	Run: func(cmd *cobra.Command, args []string) {
-		parseJWT()
+		jwtToken := readFromPipe()
+		parseJWT(jwtToken)
 	},
 }
 
@@ -24,9 +25,7 @@ func init() {
 	root.Cmd.AddCommand(Cmd)
 }
 
-func parseJWT() {
-	jwtToken := readFromPipe()
-
+func parseJWT(jwtToken string) {
 	// Parse JWT
 	token, _ := jwt.Parse(jwtToken, func(token *jwt.Token) (interface{}, error) { return nil, nil })
 
