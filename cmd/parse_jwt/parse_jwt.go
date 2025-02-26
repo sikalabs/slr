@@ -13,10 +13,14 @@ import (
 )
 
 var Cmd = &cobra.Command{
-	Use:   "parse-jwt",
+	Use:   "parse-jwt <jwt>",
 	Short: "Parse JWT from stdin into JSON list of 3 objects (Header, Payload, Signature)",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		jwtToken := readFromPipe()
+		jwtToken := args[0]
+		if jwtToken == "-" {
+			jwtToken = readFromPipe()
+		}
 		parseJWT(jwtToken)
 	},
 }
