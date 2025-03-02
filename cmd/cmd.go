@@ -7,6 +7,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/get_gps_info_from_jpg"
 	_ "github.com/sikalabs/slr/cmd/get_jwt_from_oidc"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_file"
+	_ "github.com/sikalabs/slr/cmd/gojekyll"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
