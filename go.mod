@@ -8,7 +8,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/coreos/go-oidc v2.2.1+incompatible
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/hashicorp/vault/api v1.15.0
 	github.com/mlosinsky/clisso/ssoclient v0.3.2
 	github.com/osteele/gojekyll v0.2.14
