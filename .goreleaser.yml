@@ -1,3 +1,5 @@
+version: 2
+
 project_name: slr
 
 before:
@@ -42,7 +44,7 @@ builds:
     binary: slr
 
 archives:
-  - format: tar.gz
+  - formats: [ "tar.gz" ]
     name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
 release:
@@ -55,13 +57,13 @@ checksum:
 brews:
   -
     name: slr
-    tap:
+    repository:
       owner: sikalabs
       name: homebrew-tap
     skip_upload: auto
     homepage: https://github.com/sikalabs/slr
     url_template: "https://github.com/sikalabs/slr/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-    folder: Formula
+    directory: Formula
     caveats: "How to use this binary: https://github.com/sikalabs/slr"
     description: "slr"
     install: |
@@ -84,25 +86,27 @@ dockers:
         - "--label=org.opencontainers.image.title={{.ProjectName}}"
         - "--label=org.opencontainers.image.revision={{.FullCommit}}"
         - "--label=org.opencontainers.image.version={{.Version}}"
+        - "--label=org.opencontainers.image.source=https://github.com/sikalabs/slr"
         - "--label=org.label-schema.schema-version=1.0"
         - "--label=org.label-schema.version={{.Version}}"
         - "--label=org.label-schema.name={{.ProjectName}}"
         - "--label=com.github.actions.name={{.ProjectName}}"
         - "--label=repository=https://github.com/sikalabs/slr"
-        - "--label=maintainer=SikaLabs Opensource &lt;opensource@sikalabs.com&gt;"
+        - "--label=maintainer=SikaLabs <opensource@sikalabs.com>"
     - goos: linux
       goarch: arm64
       image_templates:
-        - "ghcr.io/sikalabs/slr:{{ .Tag }}-arm64v8"
+        - "sikalabs/slu:{{ .Tag }}-arm64v8"
       dockerfile: Dockerfile.goreleaser.arm64v8
       ids:
-        - slr
+        - slu
       build_flag_templates:
         - "--platform=linux/arm64"
         - "--label=org.opencontainers.image.created={{.Date}}"
         - "--label=org.opencontainers.image.title={{.ProjectName}}"
         - "--label=org.opencontainers.image.revision={{.FullCommit}}"
         - "--label=org.opencontainers.image.version={{.Version}}"
+        - "--label=org.opencontainers.image.source=https://github.com/sikalabs/slr"
         - "--label=org.label-schema.schema-version=1.0"
         - "--label=org.label-schema.version={{.Version}}"
         - "--label=org.label-schema.name={{.ProjectName}}"
