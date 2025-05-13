@@ -7,6 +7,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/get_gps_info_from_jpg"
 	_ "github.com/sikalabs/slr/cmd/get_helm_chart_version_from_repo"
 	_ "github.com/sikalabs/slr/cmd/get_jwt_from_oidc"
+	_ "github.com/sikalabs/slr/cmd/gitlab_create_branch"
 	_ "github.com/sikalabs/slr/cmd/gitlab_create_merge_request"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_file"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_files"
