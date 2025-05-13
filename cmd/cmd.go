@@ -9,6 +9,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/get_jwt_from_oidc"
 	_ "github.com/sikalabs/slr/cmd/gitlab_create_merge_request"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_file"
+	_ "github.com/sikalabs/slr/cmd/gitlab_update_files"
 	_ "github.com/sikalabs/slr/cmd/gojekyll"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
