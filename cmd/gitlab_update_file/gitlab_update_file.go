@@ -64,7 +64,7 @@ func init() {
 		"",
 		"Branch",
 	)
-	Cmd.MarkFlagRequired("project-id")
+	Cmd.MarkFlagRequired("branch")
 	Cmd.Flags().StringVarP(
 		&FlagFile,
 		"file",
