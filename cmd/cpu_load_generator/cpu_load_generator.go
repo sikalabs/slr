@@ -33,7 +33,7 @@ func cpuLoadGenerator(cores int) {
 		go func(wg *sync.WaitGroup) {
 			defer wg.Done()
 			for {
-				_ = 123456789 * 987654321
+				_ = int64(123456789) * int64(987654321)
 			}
 		}(&wg)
 	}
