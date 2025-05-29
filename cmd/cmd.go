@@ -3,6 +3,7 @@ package cmd
 import (
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
+	_ "github.com/sikalabs/slr/cmd/cpu_load_generator"
 	_ "github.com/sikalabs/slr/cmd/dela"
 	_ "github.com/sikalabs/slr/cmd/example"
 	_ "github.com/sikalabs/slr/cmd/get_gps_info_from_jpg"
