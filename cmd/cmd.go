@@ -21,6 +21,7 @@ import (
 	"github.com/sikalabs/slr/cmd/root"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
 	_ "github.com/sikalabs/slr/cmd/validate_jwt"
+	_ "github.com/sikalabs/slr/cmd/vault_init_unseal"
 	_ "github.com/sikalabs/slr/cmd/version"
 	"github.com/spf13/cobra"
 )
