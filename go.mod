@@ -11,7 +11,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/hashicorp/vault/api v1.16.0
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
-	github.com/osteele/gojekyll v0.2.14
+	github.com/osteele/gojekyll v0.2.16
 	github.com/prometheus/client_golang v1.21.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
