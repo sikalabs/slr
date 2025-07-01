@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/vault/api v1.16.0
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/osteele/gojekyll v0.2.16
-	github.com/prometheus/client_golang v1.21.0
+	github.com/prometheus/client_golang v1.22.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/slu v0.85.0
@@ -51,7 +51,6 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jaschaephraim/lrserver v0.0.0-20240306232639-afed386b3640 // indirect
 	github.com/k0kubun/pp v3.0.1+incompatible // indirect
-	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/kyokomi/emoji v2.2.4+incompatible // indirect
 	github.com/lufia/plan9stats v0.0.0-20250317134145-8bc96cf8fc35 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
