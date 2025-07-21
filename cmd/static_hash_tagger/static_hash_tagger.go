@@ -14,6 +14,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var FlagRenameFiles bool
+
 var Cmd = &cobra.Command{
 	Use:     "static-hash-tagger <input_file> <output_file>",
 	Short:   "Static hash tagger",
@@ -39,6 +41,18 @@ The hash is a SHA1 hash of the file content, truncated to 8 characters. If the f
 				return match
 			}
 			hash := fileHash(submatches[1])
+
+			if FlagRenameFiles {
+				filePath := submatches[1]
+				ext := regexp.MustCompile(`\.[^/.]+$`).FindString(filePath)
+				newFilePath := filePath[:len(filePath)-len(ext)] + "." + hash + ext
+				err := os.Rename(filePath, newFilePath)
+				if err != nil {
+					log.Printf("Error while rename the file %s: %v", filePath, err)
+				}
+				log.Printf("File %s was renamed to %s", filePath, newFilePath)
+			}
+
 			log.Printf("%s replaced with %s\n", match, hash)
 			return hash
 		})
@@ -52,6 +66,13 @@ The hash is a SHA1 hash of the file content, truncated to 8 characters. If the f
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
+	Cmd.Flags().BoolVarP(
+		&FlagRenameFiles,
+		"rename-files",
+		"r",
+		false,
+		"Rename files to their hash value. When disabled, it expects that ?hash={hash js/test.js} is used and it needs to by replaced by hash.",
+	)
 }
 
 func fileHash(path string) string {
