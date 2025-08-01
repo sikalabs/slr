@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/vault/api v1.20.0
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/osteele/gojekyll v0.2.16
-	github.com/prometheus/client_golang v1.22.0
+	github.com/prometheus/client_golang v1.23.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/slu v0.85.0
@@ -66,9 +66,9 @@ require (
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/pquerna/cachecontrol v0.2.0 // indirect
-	github.com/prometheus/client_model v0.6.1 // indirect
-	github.com/prometheus/common v0.62.0 // indirect
-	github.com/prometheus/procfs v0.15.1 // indirect
+	github.com/prometheus/client_model v0.6.2 // indirect
+	github.com/prometheus/common v0.65.0 // indirect
+	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/qeesung/image2ascii v1.0.1 // indirect
 	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
