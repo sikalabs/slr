@@ -44,7 +44,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/slu v0.85.0
-	github.com/spf13/cobra v1.9.1
+	github.com/spf13/cobra v1.10.1
 	golang.org/x/oauth2 v0.30.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/apimachinery v0.32.1
@@ -122,7 +122,7 @@ require (
 	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
-	github.com/spf13/pflag v1.0.6 // indirect
+	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
 	github.com/tklauser/go-sysconf v0.3.15 // indirect
