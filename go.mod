@@ -43,7 +43,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/slu v0.89.0
 	github.com/spf13/cobra v1.10.1
-	golang.org/x/oauth2 v0.30.0
+	golang.org/x/oauth2 v0.31.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/apimachinery v0.32.2
 	k8s.io/client-go v11.0.1-0.20190816222228-6d55c1b1f1ca+incompatible
