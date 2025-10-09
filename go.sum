@@ -212,8 +212,8 @@ github.com/shoenig/go-m1cpu v0.1.6 h1:nxdKQNcEB6vzgA2E2bvzKIYRuNj7XNJ4S/aRSwKzFt
 github.com/shoenig/go-m1cpu v0.1.6/go.mod h1:1JJMcUBvfNwpq05QDQVAnx3gUHr9IYF7GNg9SUEw2VQ=
 github.com/shoenig/test v0.6.4 h1:kVTaSd7WLz5WZ2IaoM0RSzRsUD+m8wRR+5qvntpn4LU=
 github.com/shoenig/test v0.6.4/go.mod h1:byHiCGXqrVaflBLAMq/srcZIHynQPQgeyvkvXnjqq0k=
-github.com/sikalabs/slu v0.89.0 h1:4QXL+zkGE/Em3yuAISpoODfOhXPd5t9ImdZoc7jY6tw=
-github.com/sikalabs/slu v0.89.0/go.mod h1:xopjwEvsklQ4TwR2hUjeclnY23MpPDMsamSYtdjh6zA=
+github.com/sikalabs/slu v0.91.1 h1:ULVpr0v8xGOODBfpDdVVwYXIimkmogjC68yJdqq+FYs=
+github.com/sikalabs/slu v0.91.1/go.mod h1:0JSthMBQGtw/POhFihgnP9m5kCeTEnj0J3bm2NzFoHI=
 github.com/smarty/assertions v1.15.0 h1:cR//PqUBUiQRakZWqBiFFQ9wb8emQGDb0HeGdqGByCY=
 github.com/smarty/assertions v1.15.0/go.mod h1:yABtdzeQs6l1brC900WlRNwj6ZR55d7B+E8C6HtKdec=
 github.com/smartystreets/goconvey v1.8.1 h1:qGjIddxOk4grTu9JPOU31tVfq3cNdBlNa5sSznIX1xY=
