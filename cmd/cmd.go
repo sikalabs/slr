@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	_ "github.com/sikalabs/slr/cmd/add_ad_to_readme"
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
