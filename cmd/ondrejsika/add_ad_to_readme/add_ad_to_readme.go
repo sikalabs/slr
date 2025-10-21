@@ -7,14 +7,14 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slr/cmd/ondrejsika"
 	"github.com/spf13/cobra"
 )
 
 var FlagCourse string
 
 func init() {
-	root.Cmd.AddCommand(Cmd)
+	ondrejsika.Cmd.AddCommand(Cmd)
 	Cmd.Flags().StringVarP(&FlagCourse, "course", "c", "", "Course name (e.g., kubernetes)")
 	Cmd.MarkFlagRequired("course")
 }
