@@ -14,12 +14,14 @@ import (
 var FlagInterface string
 var FlagTestURL string
 var FlagTimeout int
+var FlagLogFile string
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
 	Cmd.Flags().StringVarP(&FlagInterface, "interface", "i", "eno1", "Network interface to restart")
 	Cmd.Flags().StringVarP(&FlagTestURL, "test-url", "u", "https://checkip.amazonaws.com/", "URL to test network connectivity")
 	Cmd.Flags().IntVarP(&FlagTimeout, "timeout", "t", 10, "Timeout in seconds for network test")
+	Cmd.Flags().StringVarP(&FlagLogFile, "log-file", "l", "/var/log/restart-eno1.log", "Log file path for JSON logs")
 }
 
 var Cmd = &cobra.Command{
@@ -27,7 +29,7 @@ var Cmd = &cobra.Command{
 	Short: "Install systemd service and timer to restart eno1 interface every minute",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		installSystemd(FlagInterface, FlagTestURL, FlagTimeout)
+		installSystemd(FlagInterface, FlagTestURL, FlagTimeout, FlagLogFile)
 	},
 }
 
@@ -39,7 +41,7 @@ func getExecutablePath() (string, error) {
 	return filepath.Abs(execPath)
 }
 
-func installSystemd(interfaceName, testURL string, timeout int) {
+func installSystemd(interfaceName, testURL string, timeout int, logFile string) {
 	execPath, err := getExecutablePath()
 	if err != nil {
 		log.Fatalf("Failed to get executable path: %v", err)
@@ -47,6 +49,7 @@ func installSystemd(interfaceName, testURL string, timeout int) {
 
 	fmt.Printf("Installing systemd service and timer for restart-eno1...\n")
 	fmt.Printf("Executable path: %s\n", execPath)
+	fmt.Printf("Log file: %s\n", logFile)
 
 	// Create service file content
 	serviceContent := fmt.Sprintf(`[Unit]
@@ -55,13 +58,13 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=%s restart-eno1 --interface %s --test-url %s --timeout %d
+ExecStart=%s restart-eno1 --interface %s --test-url %s --timeout %d --log-file %s
 StandardOutput=journal
 StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
-`, interfaceName, execPath, interfaceName, testURL, timeout)
+`, interfaceName, execPath, interfaceName, testURL, timeout, logFile)
 
 	// Create timer file content
 	timerContent := `[Unit]
@@ -127,10 +130,12 @@ WantedBy=timers.target
 
 	fmt.Println("\n=== Installation complete ===")
 	fmt.Println("The restart-eno1 command will now run every minute.")
+	fmt.Printf("JSON logs will be written to: %s\n", logFile)
 	fmt.Println("\nUseful commands:")
 	fmt.Println("  systemctl status restart-eno1.timer   # Check timer status")
 	fmt.Println("  systemctl status restart-eno1.service # Check service status")
 	fmt.Println("  journalctl -u restart-eno1.service    # View logs")
+	fmt.Printf("  tail -f %s                            # View JSON logs\n", logFile)
 	fmt.Println("  systemctl stop restart-eno1.timer     # Stop timer")
 	fmt.Println("  systemctl disable restart-eno1.timer  # Disable timer")
 }
