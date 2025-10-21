@@ -39,8 +39,5 @@ You can create new command from [cmd/example](./cmd/example/example.go).
 Update version in `version/version.go` using [slu](https://github.com/sikalabs/slu), create new tag and push it.
 
 ```
-slu go-code version-bump --auto --tag
-slu go-code version-bump --auto
-git push
-git push --tags
+make release
 ```
