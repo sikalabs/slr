@@ -7,9 +7,11 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strconv"
 	"time"
 
 	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slu/utils/telegram_utils"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +19,9 @@ var FlagInterface string
 var FlagTestURL string
 var FlagTimeout int
 var FlagLogFile string
+var FlagTelegramBotToken string
+var FlagTelegramChatID string
+var FlagTelegramTimeout int
 
 type LogEntry struct {
 	Date      string `json:"date"`
@@ -32,6 +37,9 @@ func init() {
 	Cmd.Flags().StringVarP(&FlagTestURL, "test-url", "u", "https://checkip.amazonaws.com/", "URL to test network connectivity")
 	Cmd.Flags().IntVarP(&FlagTimeout, "timeout", "t", 10, "Timeout in seconds for network test")
 	Cmd.Flags().StringVarP(&FlagLogFile, "log-file", "l", "", "Log file path for JSON logs")
+	Cmd.Flags().StringVar(&FlagTelegramBotToken, "bot-token", "", "Telegram bot token for notifications")
+	Cmd.Flags().StringVarP(&FlagTelegramChatID, "chat-id", "c", "", "Telegram chat ID for notifications")
+	Cmd.Flags().IntVar(&FlagTelegramTimeout, "telegram-timeout", 300, "Timeout in seconds for telegram notification retry (default 5 minutes)")
 }
 
 var Cmd = &cobra.Command{
@@ -39,7 +47,7 @@ var Cmd = &cobra.Command{
 	Short: "Restart eno1 interface when network is not reachable",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		restartEno1(FlagInterface, FlagTestURL, FlagTimeout, FlagLogFile)
+		restartEno1(FlagInterface, FlagTestURL, FlagTimeout, FlagLogFile, FlagTelegramBotToken, FlagTelegramChatID, FlagTelegramTimeout)
 	},
 }
 
@@ -153,7 +161,66 @@ func restartInterface(interfaceName string, logFile string) error {
 	return nil
 }
 
-func restartEno1(interfaceName, testURL string, timeout int, logFile string) {
+func sendTelegramNotificationWithRetry(botToken, chatID, message string, timeoutSeconds int, logFile string) {
+	if botToken == "" || chatID == "" {
+		return
+	}
+
+	// Convert chatID to int64
+	chatIDInt, err := strconv.ParseInt(chatID, 10, 64)
+	if err != nil {
+		fmt.Printf("Invalid chat ID format: %v\n", err)
+		writeLog(logFile, LogEntry{
+			Event:   "telegram_notification",
+			Status:  "ERR",
+			Message: fmt.Sprintf("Invalid chat ID format: %v", err),
+		})
+		return
+	}
+
+	fmt.Printf("Sending Telegram notification to chat %s...\n", chatID)
+
+	deadline := time.Now().Add(time.Duration(timeoutSeconds) * time.Second)
+	attempt := 0
+
+	for time.Now().Before(deadline) {
+		attempt++
+		fmt.Printf("Telegram notification attempt %d...\n", attempt)
+
+		err := telegram_utils.TelegramSendMessage(botToken, chatIDInt, message)
+		if err == nil {
+			fmt.Println("Telegram notification sent successfully!")
+			writeLog(logFile, LogEntry{
+				Event:   "telegram_notification",
+				Status:  "OK",
+				Message: "Telegram notification sent successfully",
+			})
+			return
+		}
+
+		fmt.Printf("Failed to send Telegram notification: %v\n", err)
+
+		if time.Now().Add(2 * time.Second).After(deadline) {
+			fmt.Println("Telegram notification timeout reached")
+			writeLog(logFile, LogEntry{
+				Event:   "telegram_notification",
+				Status:  "ERR",
+				Message: fmt.Sprintf("Failed to send Telegram notification after %d attempts: %v", attempt, err),
+			})
+			return
+		}
+
+		time.Sleep(2 * time.Second)
+	}
+
+	writeLog(logFile, LogEntry{
+		Event:   "telegram_notification",
+		Status:  "ERR",
+		Message: fmt.Sprintf("Telegram notification timeout after %d attempts", attempt),
+	})
+}
+
+func restartEno1(interfaceName, testURL string, timeout int, logFile, telegramBotToken, telegramChatID string, telegramTimeout int) {
 	if testNetworkConnectivity(testURL, timeout, logFile) {
 		fmt.Println("Network is already reachable, no need to restart interface")
 		return
@@ -168,9 +235,14 @@ func restartEno1(interfaceName, testURL string, timeout int, logFile string) {
 
 	fmt.Printf("\nInterface %s restarted successfully\n\n", interfaceName)
 
-	if testNetworkConnectivity(testURL, timeout, logFile) {
+	networkOK := testNetworkConnectivity(testURL, timeout, logFile)
+	if networkOK {
 		fmt.Println("\nSuccess! Network is now reachable after interface restart")
 	} else {
 		fmt.Println("\nWarning: Network is still not reachable after interface restart")
+
+		// Send Telegram notification about failure (only on errors)
+		message := fmt.Sprintf("⚠️ Interface %s was restarted but network is still not reachable!", interfaceName)
+		sendTelegramNotificationWithRetry(telegramBotToken, telegramChatID, message, telegramTimeout, logFile)
 	}
 }

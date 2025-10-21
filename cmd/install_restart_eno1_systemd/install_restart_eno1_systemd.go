@@ -15,6 +15,9 @@ var FlagInterface string
 var FlagTestURL string
 var FlagTimeout int
 var FlagLogFile string
+var FlagTelegramBotToken string
+var FlagTelegramChatID string
+var FlagTelegramTimeout int
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
@@ -22,6 +25,9 @@ func init() {
 	Cmd.Flags().StringVarP(&FlagTestURL, "test-url", "u", "https://checkip.amazonaws.com/", "URL to test network connectivity")
 	Cmd.Flags().IntVarP(&FlagTimeout, "timeout", "t", 10, "Timeout in seconds for network test")
 	Cmd.Flags().StringVarP(&FlagLogFile, "log-file", "l", "/var/log/restart-eno1.log", "Log file path for JSON logs")
+	Cmd.Flags().StringVar(&FlagTelegramBotToken, "bot-token", "", "Telegram bot token for notifications")
+	Cmd.Flags().StringVarP(&FlagTelegramChatID, "chat-id", "c", "", "Telegram chat ID for notifications")
+	Cmd.Flags().IntVar(&FlagTelegramTimeout, "telegram-timeout", 300, "Timeout in seconds for telegram notification retry (default 5 minutes)")
 }
 
 var Cmd = &cobra.Command{
@@ -29,7 +35,7 @@ var Cmd = &cobra.Command{
 	Short: "Install systemd service and timer to restart eno1 interface every minute",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		installSystemd(FlagInterface, FlagTestURL, FlagTimeout, FlagLogFile)
+		installSystemd(FlagInterface, FlagTestURL, FlagTimeout, FlagLogFile, FlagTelegramBotToken, FlagTelegramChatID, FlagTelegramTimeout)
 	},
 }
 
@@ -41,7 +47,7 @@ func getExecutablePath() (string, error) {
 	return filepath.Abs(execPath)
 }
 
-func installSystemd(interfaceName, testURL string, timeout int, logFile string) {
+func installSystemd(interfaceName, testURL string, timeout int, logFile, telegramBotToken, telegramChatID string, telegramTimeout int) {
 	execPath, err := getExecutablePath()
 	if err != nil {
 		log.Fatalf("Failed to get executable path: %v", err)
@@ -50,6 +56,17 @@ func installSystemd(interfaceName, testURL string, timeout int, logFile string) 
 	fmt.Printf("Installing systemd service and timer for restart-eno1...\n")
 	fmt.Printf("Executable path: %s\n", execPath)
 	fmt.Printf("Log file: %s\n", logFile)
+	if telegramBotToken != "" && telegramChatID != "" {
+		fmt.Printf("Telegram notifications: enabled (chat ID: %s)\n", telegramChatID)
+	} else {
+		fmt.Println("Telegram notifications: disabled")
+	}
+
+	// Build command with optional telegram parameters
+	execCmd := fmt.Sprintf("%s restart-eno1 --interface %s --test-url %s --timeout %d --log-file %s", execPath, interfaceName, testURL, timeout, logFile)
+	if telegramBotToken != "" && telegramChatID != "" {
+		execCmd += fmt.Sprintf(" --bot-token %s --chat-id %s --telegram-timeout %d", telegramBotToken, telegramChatID, telegramTimeout)
+	}
 
 	// Create service file content
 	serviceContent := fmt.Sprintf(`[Unit]
@@ -58,13 +75,13 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=%s restart-eno1 --interface %s --test-url %s --timeout %d --log-file %s
+ExecStart=%s
 StandardOutput=journal
 StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
-`, interfaceName, execPath, interfaceName, testURL, timeout, logFile)
+`, interfaceName, execCmd)
 
 	// Create timer file content
 	timerContent := `[Unit]

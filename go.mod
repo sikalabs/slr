@@ -1,6 +1,6 @@
 module github.com/sikalabs/slr
 
-go 1.24.6
+go 1.25.0
 
 replace (
 	cloud.google.com/go => cloud.google.com/go v0.109.0
@@ -44,7 +44,7 @@ require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
-	github.com/sikalabs/slu v0.91.1
+	github.com/sikalabs/slu v0.92.0
 	github.com/spf13/cobra v1.10.1
 	golang.org/x/oauth2 v0.32.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -89,7 +89,7 @@ require (
 	github.com/google/gnostic-models v0.7.0 // indirect
 	github.com/google/go-github v17.0.0+incompatible // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/google/uuid v1.6.0 // indirect
+	github.com/google/uuid v1.6.1-0.20241114170450-2d3c2a9cc518 // indirect
 	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
