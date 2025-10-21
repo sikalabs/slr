@@ -13,6 +13,7 @@
 
 # Go
 slr
+slr-linux-amd64
 *.exe
 /dist/**
 cobra-docs
