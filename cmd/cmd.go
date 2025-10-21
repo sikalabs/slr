@@ -18,6 +18,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_file"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_files"
 	_ "github.com/sikalabs/slr/cmd/gojekyll"
+	_ "github.com/sikalabs/slr/cmd/install_restart_eno1_systemd"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
