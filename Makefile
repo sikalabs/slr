@@ -11,3 +11,9 @@ endif
 
 	@make build-linux-amd64
 	scp slr-linux-amd64 ${TO}
+
+release:
+	slu go-code version-bump --auto --tag
+	slu go-code version-bump --auto
+	git push
+	git push --tags
