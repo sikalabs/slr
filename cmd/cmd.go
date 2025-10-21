@@ -21,6 +21,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/install_restart_eno1_systemd"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	_ "github.com/sikalabs/slr/cmd/restart_eno1"
