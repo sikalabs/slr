@@ -22,6 +22,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
+	_ "github.com/sikalabs/slr/cmd/restart_eno1"
 	"github.com/sikalabs/slr/cmd/root"
 	_ "github.com/sikalabs/slr/cmd/static_hash_tagger"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
