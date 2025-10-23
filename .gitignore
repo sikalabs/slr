@@ -10,6 +10,8 @@
 *.backup
 *.local.txt
 *.local.sh
+*.local.yml
+*.local.yaml
 
 # Go
 slr
