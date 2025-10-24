@@ -32,10 +32,12 @@ type SecretData struct {
 }
 
 var FlagFile string
+var FlagReplace []string
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
 	Cmd.Flags().StringVarP(&FlagFile, "file", "f", ".sikalabs/vault/vault.yaml", "Path to vault.yaml configuration file")
+	Cmd.Flags().StringSliceVarP(&FlagReplace, "replace", "r", []string{}, "Secret paths to replace even if they exist (can be specified multiple times)")
 }
 
 var Cmd = &cobra.Command{
@@ -43,7 +45,7 @@ var Cmd = &cobra.Command{
 	Short: "Populate Vault with secrets from .sikalabs/vault.yaml configuration",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		err := vaultFiller(FlagFile)
+		err := vaultFiller(FlagFile, FlagReplace)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
@@ -51,7 +53,7 @@ var Cmd = &cobra.Command{
 	},
 }
 
-func vaultFiller(configFile string) error {
+func vaultFiller(configFile string, replacePaths []string) error {
 	// Read the YAML file
 	data, err := os.ReadFile(configFile)
 	if err != nil {
@@ -76,15 +78,22 @@ func vaultFiller(configFile string) error {
 	for _, secret := range config.RequiredSecrets {
 		fmt.Printf("\nProcessing secret path: %s\n", secret.Path)
 
+		// Check if this path should be replaced
+		shouldReplace := contains(replacePaths, secret.Path)
+
 		// Check if secret already exists
 		exists, err := secretExists(config.VaultAddr, secret.Path)
 		if err != nil {
 			return fmt.Errorf("failed to check if secret exists at %s: %w", secret.Path, err)
 		}
 
-		if exists {
+		if exists && !shouldReplace {
 			fmt.Printf("  Secret already exists, skipping\n")
 			continue
+		}
+
+		if exists && shouldReplace {
+			fmt.Printf("  Secret already exists, replacing\n")
 		}
 
 		// Collect all key-value pairs for this secret
@@ -117,10 +126,14 @@ func vaultFiller(configFile string) error {
 			return fmt.Errorf("failed to create secret at %s: %w", secret.Path, err)
 		}
 
-		fmt.Printf("✓ Secret created at: %s\n", secret.Path)
+		if shouldReplace {
+			fmt.Printf("✓ Secret replaced at: %s\n", secret.Path)
+		} else {
+			fmt.Printf("✓ Secret created at: %s\n", secret.Path)
+		}
 	}
 
-	fmt.Println("\nAll secrets have been created successfully!")
+	fmt.Println("\nAll secrets have been processed successfully!")
 	return nil
 }
 
@@ -162,4 +175,13 @@ func createVaultSecret(vaultAddr, path string, data map[string]string) error {
 	}
 
 	return nil
+}
+
+func contains(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
 }
