@@ -28,6 +28,7 @@ type RequiredSecret struct {
 type SecretData struct {
 	Name              string                 `yaml:"name"`
 	PasswordGenerator map[string]interface{} `yaml:"passwordGenerator,omitempty"`
+	Value             string                 `yaml:"value,omitempty"`
 }
 
 var FlagFile string
@@ -98,6 +99,10 @@ func vaultFiller(configFile string) error {
 				}
 				value = password
 				fmt.Printf("  - %s: [generated]\n", item.Name)
+			} else if item.Value != "" {
+				// Use static value
+				value = item.Value
+				fmt.Printf("  - %s: %s [static]\n", item.Name, value)
 			} else {
 				// Prompt user for input
 				fmt.Printf("  - %s: ", item.Name)
