@@ -28,6 +28,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	_ "github.com/sikalabs/slr/cmd/restart_eno1"
 	"github.com/sikalabs/slr/cmd/root"
+	_ "github.com/sikalabs/slr/cmd/s3_backups_cleanup"
 	_ "github.com/sikalabs/slr/cmd/static_hash_tagger"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
 	_ "github.com/sikalabs/slr/cmd/time_exporter"
