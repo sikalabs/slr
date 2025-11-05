@@ -1,6 +1,6 @@
 module github.com/sikalabs/slr
 
-go 1.25.0
+go 1.25.3
 
 replace (
 	cloud.google.com/go => cloud.google.com/go v0.109.0
@@ -148,6 +148,7 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
+	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105165509-07a7607e5e7b // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect

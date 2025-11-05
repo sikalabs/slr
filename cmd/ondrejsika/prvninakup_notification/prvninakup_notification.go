@@ -1,15 +1,12 @@
 package prvninakup_notification
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
-	"crypto/sha256"
-	"encoding/base64"
 	"log"
 	"os"
 	"strconv"
 	"strings"
 
+	"github.com/sikalabs/sikalabs-crypt-go/pkg/sikalabs_crypt"
 	"github.com/sikalabs/slr/cmd/ondrejsika"
 	"github.com/sikalabs/slu/utils/telegram_utils"
 	"github.com/spf13/cobra"
@@ -29,58 +26,34 @@ var Cmd = &cobra.Command{
 }
 
 func prvninakupNotification(message string) {
-	token := decrypt(`Cp8d0s9+0+HBRvDahbBFVY3SVX2Dx3Mz62IOujzXX0Std3e54MPMf9hra8GeFi54FcH8GrYt5R6wUv9ASe32ReZgJoiF2SN3TPo=`)
-	chatIdStr := decrypt(`QLmcbQU+kFVakiHK9lqA+st/4roWlJvgX9vwXRGDLBnYanKErKsh`)
+	token := decrypt(`4aAqYCh1QmuyueqKrBEaqWEZOOPQXu1l0XY3UT05hyNGaWdLfKL5UlrdiENGsaBKw8YNXls/s8P1JlBQKqHtg4nBQtGzKS/vaLhh0olbLlcaoA9fLZKmNZzC`)
+	chatIdStr := decrypt(`1ulLRgySHnjlHPRV+oJly3EKqdB2ZdR3+7eIIXEzon0HDQROk9qgTEhzXHxyufkcSBJLZ0xttQ==`)
 	chatId, _ := strconv.Atoi(chatIdStr)
 	telegram_utils.TelegramSendMessage(token, int64(chatId), message)
 }
 
-func decrypt(encryptedDataBase64 string) string {
-	password := ""
+func decrypt(encrypted string) string {
+	password := password()
+	decrypted, err := sikalabs_crypt.SikaLabsSymmetricDecryptV1(password, encrypted)
+	if err != nil {
+		log.Fatalln("Decryption error:", err)
+	}
+	return decrypted
+}
 
+func password() string {
+	pwd := ""
 	// Try to read password from /etc/SLR_ENCRYPTION_PASSWORD
 	if data, err := os.ReadFile("/etc/SLR_ENCRYPTION_PASSWORD"); err == nil {
-		password = strings.TrimSpace(string(data))
+		pwd = strings.TrimSpace(string(data))
 	}
-
 	// Fall back to environment variable
-	if password == "" {
-		password = os.Getenv("SLR_ENCRYPTION_PASSWORD")
+	if pwd == "" {
+		pwd = os.Getenv("SLR_ENCRYPTION_PASSWORD")
 	}
-
-	if password == "" {
+	// Fatal if password is still empty
+	if pwd == "" {
 		log.Fatalln("SLR_ENCRYPTION_PASSWORD not found in /etc/SLR_ENCRYPTION_PASSWORD or environment variable")
 	}
-
-	hash := sha256.Sum256([]byte(password))
-	key := hash[:]
-
-	encryptedData, err := base64.StdEncoding.DecodeString(encryptedDataBase64)
-	if err != nil {
-		log.Fatalf("Failed to decode encrypted data: %v", err)
-	}
-
-	block, err := aes.NewCipher(key)
-	if err != nil {
-		log.Fatalf("Failed to create cipher: %v", err)
-	}
-
-	aesGCM, err := cipher.NewGCM(block)
-	if err != nil {
-		log.Fatalf("Failed to create GCM: %v", err)
-	}
-
-	nonceSize := aesGCM.NonceSize()
-	if len(encryptedData) < nonceSize {
-		log.Fatal("Ciphertext too short")
-	}
-
-	nonce, ciphertext := encryptedData[:nonceSize], encryptedData[nonceSize:]
-
-	plaintext, err := aesGCM.Open(nil, nonce, ciphertext, nil)
-	if err != nil {
-		log.Fatalf("Decryption failed: %v", err)
-	}
-
-	return string(plaintext)
+	return pwd
 }
