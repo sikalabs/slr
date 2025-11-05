@@ -12,6 +12,7 @@
 *.local.sh
 *.local.yml
 *.local.yaml
+Makefile.local.mk
 
 # Go
 slr
