@@ -36,9 +36,20 @@ func prvninakupNotification(message string) {
 }
 
 func decrypt(encryptedDataBase64 string) string {
-	password := os.Getenv("SLR_ENCRYPTION_PASSWORD")
+	password := ""
+
+	// Try to read password from /etc/SLR_ENCRYPTION_PASSWORD
+	if data, err := os.ReadFile("/etc/SLR_ENCRYPTION_PASSWORD"); err == nil {
+		password = strings.TrimSpace(string(data))
+	}
+
+	// Fall back to environment variable
 	if password == "" {
-		log.Fatalln("SLR_ENCRYPTION_PASSWORD environment variable is not set")
+		password = os.Getenv("SLR_ENCRYPTION_PASSWORD")
+	}
+
+	if password == "" {
+		log.Fatalln("SLR_ENCRYPTION_PASSWORD not found in /etc/SLR_ENCRYPTION_PASSWORD or environment variable")
 	}
 
 	hash := sha256.Sum256([]byte(password))
