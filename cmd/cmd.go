@@ -23,6 +23,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_ad_to_readme"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_claude_md_from_sikalabs_slu"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/prvninakup_notification"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/stegosay"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
