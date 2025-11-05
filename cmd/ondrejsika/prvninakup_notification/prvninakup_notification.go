@@ -32,7 +32,7 @@ func prvninakupNotification(message string) {
 	token := decrypt(`Cp8d0s9+0+HBRvDahbBFVY3SVX2Dx3Mz62IOujzXX0Std3e54MPMf9hra8GeFi54FcH8GrYt5R6wUv9ASe32ReZgJoiF2SN3TPo=`)
 	chatIdStr := decrypt(`QLmcbQU+kFVakiHK9lqA+st/4roWlJvgX9vwXRGDLBnYanKErKsh`)
 	chatId, _ := strconv.Atoi(chatIdStr)
-	telegram_utils.TelegramSendMessageMarkdown(token, int64(chatId), message)
+	telegram_utils.TelegramSendMessage(token, int64(chatId), message)
 }
 
 func decrypt(encryptedDataBase64 string) string {
