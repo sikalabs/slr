@@ -48,7 +48,9 @@ require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
+	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
 	github.com/sikalabs/slu v0.93.0
+	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106004626-ae8fb2e37488
 	github.com/spf13/cobra v1.10.1
 	golang.org/x/oauth2 v0.32.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -148,7 +150,6 @@ require (
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
-	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105165509-07a7607e5e7b // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
