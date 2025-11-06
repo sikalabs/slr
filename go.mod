@@ -50,7 +50,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
 	github.com/sikalabs/slu v0.93.0
-	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106004626-ae8fb2e37488
+	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1
 	github.com/spf13/cobra v1.10.1
 	golang.org/x/oauth2 v0.32.0
 	gopkg.in/yaml.v3 v3.0.1
