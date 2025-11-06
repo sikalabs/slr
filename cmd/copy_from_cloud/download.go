@@ -14,7 +14,7 @@ import (
 )
 
 func s3downloadFile(cfg encrypted.S3Config, name string) ([]byte, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Second)
 	defer cancel()
 
 	// Build an AWS config that uses the provided region + static credentials.
