@@ -10,7 +10,6 @@ func init() {
 }
 
 var Cmd = &cobra.Command{
-	Use:     "vibe",
-	Aliases: []string{"os"},
-	Short:   "Space for vibe-coded stuff",
+	Use:   "vibe",
+	Short: "Space for vibe-coded stuff",
 }
