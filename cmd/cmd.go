@@ -41,6 +41,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/static_hash_tagger"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
 	_ "github.com/sikalabs/slr/cmd/time_exporter"
+	_ "github.com/sikalabs/slr/cmd/training"
 	_ "github.com/sikalabs/slr/cmd/validate_jwt"
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_from_vault"
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_to_vault"
