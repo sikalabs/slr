@@ -8,7 +8,7 @@ build-linux-amd64:
 
 build-and-scp:
 ifndef TO
-	$(error TO is undefined, use 'make build-and-scp TO=root@server.example.com:/slu')
+	$(error TO is undefined, use 'make build-and-scp TO=root@server.example.com:/slr')
 endif
 
 	@make build-linux-amd64
