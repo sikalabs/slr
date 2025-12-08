@@ -1,14 +1,13 @@
 package load_kubeconfig
 
 import (
-	"context"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slr/internal/kv"
 	"github.com/spf13/cobra"
 )
 
@@ -22,11 +21,11 @@ func init() {
 
 var Cmd = &cobra.Command{
 	Use:     "load-kubeconfig",
-	Short:   "Load kubeconfig from Redis",
+	Short:   "Load kubeconfig from key-value storage",
 	Aliases: []string{"load-k"},
 	Args:    cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		err := loadKubeconfigFromRedis(FlagHostname)
+		err := loadKubeconfigFromStorage(FlagHostname)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
@@ -35,23 +34,12 @@ var Cmd = &cobra.Command{
 	},
 }
 
-func loadKubeconfigFromRedis(hostname string) error {
-	ctx := context.Background()
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "lab0.sikademo.com:6379",
-		Password: "ThisIsRedisPassword",
-		DB:       0,
-	})
-	defer rdb.Close()
+func loadKubeconfigFromStorage(hostname string) error {
+	key := "kubeconfig-" + hostname
 
-	if err := rdb.Ping(ctx).Err(); err != nil {
-		return fmt.Errorf("failed to connect to Redis: %w", err)
-	}
-
-	redisKey := "kubeconfig-" + hostname
-	kubeconfigContent, err := rdb.Get(ctx, redisKey).Result()
+	kubeconfigContent, err := kv.Get(key)
 	if err != nil {
-		return fmt.Errorf("failed to get kubeconfig from Redis: %w", err)
+		return fmt.Errorf("failed to get kubeconfig: %w", err)
 	}
 
 	tmpFile := filepath.Join("/tmp", "kubeconfig-"+hostname)

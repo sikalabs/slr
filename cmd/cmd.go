@@ -4,7 +4,6 @@ import (
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
-	_ "github.com/sikalabs/slr/cmd/connect_sikademo_cluster"
 	_ "github.com/sikalabs/slr/cmd/copy_from_cloud"
 	_ "github.com/sikalabs/slr/cmd/copy_to_cloud"
 	_ "github.com/sikalabs/slr/cmd/cpu_load_generator"
