@@ -44,6 +44,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/hashicorp/vault/api v1.22.0
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
+	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208155642-bff3fa861e60
 	github.com/osteele/gojekyll v0.2.16
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
