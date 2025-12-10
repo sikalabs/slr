@@ -266,6 +266,8 @@ github.com/shoenig/go-m1cpu v0.1.7 h1:C76Yd0ObKR82W4vhfjZiCp0HxcSZ8Nqd84v+HZ0qyI
 github.com/shoenig/go-m1cpu v0.1.7/go.mod h1:KkDOw6m3ZJQAPHbrzkZki4hnx+pDRR1Lo+ldA56wD5w=
 github.com/shoenig/test v1.7.0 h1:eWcHtTXa6QLnBvm0jgEabMRN/uJ4DMV3M8xUGgRkZmk=
 github.com/shoenig/test v1.7.0/go.mod h1:UxJ6u/x2v/TNs/LoLxBNJRV9DiwBBKYxXSyczsBHFoI=
+github.com/sikalabs/install-slu v0.1.0 h1:QSKPLVEUUSsOutDXAgnUDci1w8Fy5tr80jOCA+Blcxg=
+github.com/sikalabs/install-slu v0.1.0/go.mod h1:EzGbW6O9GBNMGDXs3juAqTw33Higj0lKLz3UljtaLOI=
 github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552 h1:EiLCh0kiHlgJXz1TKD8mfy3qFgnkFiX9TthlKHO/U8Y=
 github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552/go.mod h1:TrthX6be5utClxOieSRN8T3DOlFZ1oaK/9Ye2oCFaFg=
 github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251106121505-ca9e5b9ed6f8 h1:2iNP8yOVnpc+aLw/cTaqzkLWCh3bwiRC7w4Va9G2xQY=
