@@ -1,4 +1,4 @@
-package connect_sikademo_cluster
+package connect
 
 import (
 	"encoding/base64"
@@ -12,7 +12,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slr/cmd/training/kubernetes"
 	"github.com/sikalabs/slu/utils/file_utils"
 	"github.com/spf13/cobra"
 )
@@ -20,9 +20,10 @@ import (
 var FlagSuffix string
 
 var Cmd = &cobra.Command{
-	Use:   "connect-sikademo-cluster",
-	Short: "Connect to sikademo Kubernetes cluster",
-	Args:  cobra.NoArgs,
+	Use:     "connect",
+	Short:   "Connect to sikademo Kubernetes cluster",
+	Aliases: []string{"c"},
+	Args:    cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
 		home, err := os.UserHomeDir()
 		if err != nil {
@@ -74,7 +75,7 @@ var Cmd = &cobra.Command{
 }
 
 func init() {
-	training.Cmd.AddCommand(Cmd)
+	kubernetes.Cmd.AddCommand(Cmd)
 	Cmd.Flags().StringVarP(
 		&FlagSuffix,
 		"suffix",
