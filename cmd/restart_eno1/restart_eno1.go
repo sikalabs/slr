@@ -242,7 +242,7 @@ func restartEno1(interfaceName, testURL string, timeout int, logFile, telegramBo
 		fmt.Println("\nWarning: Network is still not reachable after interface restart")
 
 		// Send Telegram notification about failure (only on errors)
-		message := fmt.Sprintf("⚠️ Interface %s was restarted but network is still not reachable!", interfaceName)
+		message := fmt.Sprintf("⚠️ Interface %s was restarted!", interfaceName)
 		sendTelegramNotificationWithRetry(telegramBotToken, telegramChatID, message, telegramTimeout, logFile)
 	}
 }
