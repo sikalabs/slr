@@ -31,6 +31,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/backup_file_ducr"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/example"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/prvninakup_notification"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/set_exif_time"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/stegosay"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
