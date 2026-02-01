@@ -55,7 +55,7 @@ require (
 	github.com/sikalabs/slu v0.95.2
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1
 	github.com/spf13/cobra v1.10.2
-	golang.org/x/oauth2 v0.33.0
+	golang.org/x/oauth2 v0.34.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/apimachinery v0.34.1
 	k8s.io/client-go v11.0.1-0.20190816222228-6d55c1b1f1ca+incompatible
