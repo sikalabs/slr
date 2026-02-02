@@ -9,17 +9,33 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/remote/transport"
 	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slu/utils/mail_utils"
 	"github.com/spf13/cobra"
 )
 
+var FlagSmtpHost string
+var FlagSmtpPort int
+var FlagSmtpUser string
+var FlagSmtpPassword string
+var FlagMailFrom string
+var FlagMailTo string
+
 func init() {
 	root.Cmd.AddCommand(Cmd)
+	Cmd.Flags().StringVar(&FlagSmtpHost, "smtp-host", "", "SMTP host")
+	Cmd.Flags().IntVar(&FlagSmtpPort, "smtp-port", 587, "SMTP port")
+	Cmd.Flags().StringVar(&FlagSmtpUser, "smtp-user", "", "SMTP user (defaults to --mail-from)")
+	Cmd.Flags().StringVar(&FlagSmtpPassword, "smtp-password", "", "SMTP password")
+	Cmd.Flags().StringVar(&FlagMailFrom, "mail-from", "", "Email sender address")
+	Cmd.Flags().StringVar(&FlagMailTo, "mail-to", "", "Email recipient address (comma-separated for multiple)")
 }
 
 var Cmd = &cobra.Command{
@@ -47,8 +63,40 @@ func checkDockerCredentials() {
 		err := checkRegistry(registry)
 		if err != nil {
 			fmt.Printf("❌ %s: %v\n", registry, err)
+			notify(registry)
 		} else {
 			fmt.Printf("✅ %s: Valid credentials\n", registry)
+		}
+	}
+}
+
+func notify(registry string) {
+	if FlagSmtpHost == "" || FlagMailFrom == "" || FlagMailTo == "" {
+		return
+	}
+	user := FlagMailFrom
+	if FlagSmtpUser != "" {
+		user = FlagSmtpUser
+	}
+	subject := fmt.Sprintf("Docker credentials expired: %s", registry)
+	message := fmt.Sprintf("Docker credentials for registry %s are invalid or expired.", registry)
+	for _, to := range strings.Split(FlagMailTo, ",") {
+		to = strings.TrimSpace(to)
+		if to == "" {
+			continue
+		}
+		err := mail_utils.SendSimpleMail(
+			FlagSmtpHost,
+			strconv.Itoa(FlagSmtpPort),
+			user,
+			FlagSmtpPassword,
+			FlagMailFrom,
+			to,
+			subject,
+			message,
+		)
+		if err != nil {
+			fmt.Printf("Failed to send email notification for %s to %s: %v\n", registry, to, err)
 		}
 	}
 }
