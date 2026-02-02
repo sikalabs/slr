@@ -1,0 +1,10 @@
+# {{ .project.name }}
+
+Version: {{ .project.version }}
+
+{{ .project.description }}
+
+## {{ .users.title }}
+
+{{ range .users.items }}- **{{ .name }}** - {{ .role }}
+{{ end }}
