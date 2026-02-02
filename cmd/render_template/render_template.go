@@ -3,6 +3,7 @@ package render_template
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -70,6 +71,11 @@ func renderTemplate(templatePath, outputPath string, dataFlags []string) error {
 	tmpl, err := template.New("template").Parse(string(tmplContent))
 	if err != nil {
 		return fmt.Errorf("failed to parse template: %w", err)
+	}
+
+	err = os.MkdirAll(filepath.Dir(outputPath), 0755)
+	if err != nil {
+		return fmt.Errorf("failed to create output directory: %w", err)
 	}
 
 	outFile, err := os.Create(outputPath)
