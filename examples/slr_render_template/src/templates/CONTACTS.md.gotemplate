@@ -1,0 +1,7 @@
+# {{ .project.name }} Contacts
+
+| Name | Role |
+|------|------|
+{{- range .users.items }}
+| **{{ .name }}** | {{ .role }} |
+{{- end }}

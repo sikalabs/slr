@@ -1,0 +1,10 @@
+- template: ./src/templates/README.md.gotemplate
+  output: output/multiple/README.generated.md
+  data:
+    project: ./src/data/project.yaml
+    users: ./src/data/users.yaml
+- template: ./src/templates/CONTACTS.md.gotemplate
+  output: output/multiple/CONTACTS.generated.md
+  data:
+    project: ./src/data/project.yaml
+    users: ./src/data/users.yaml
