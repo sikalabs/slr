@@ -36,6 +36,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	_ "github.com/sikalabs/slr/cmd/render_template"
+	_ "github.com/sikalabs/slr/cmd/render_templates"
 	_ "github.com/sikalabs/slr/cmd/restart_eno1"
 	"github.com/sikalabs/slr/cmd/root"
 	_ "github.com/sikalabs/slr/cmd/s3_backups_cleanup"

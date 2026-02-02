@@ -30,65 +30,64 @@ var Cmd = &cobra.Command{
 	Short: "Render a Go template with data from YAML files",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		err := renderTemplate(FlagTemplate, FlagOutput, FlagData)
+		data := map[string]interface{}{}
+
+		for _, d := range FlagData {
+			parts := strings.SplitN(d, "=", 2)
+			if len(parts) != 2 {
+				fmt.Fprintf(os.Stderr, "invalid data flag format: %s, expected name=path.yaml\n", d)
+				os.Exit(1)
+			}
+			name := parts[0]
+			path := parts[1]
+
+			content, err := os.ReadFile(path)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "failed to read data file %s: %s\n", path, err)
+				os.Exit(1)
+			}
+
+			var parsed interface{}
+			err = yaml.Unmarshal(content, &parsed)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "failed to parse YAML file %s: %s\n", path, err)
+				os.Exit(1)
+			}
+
+			data[name] = parsed
+		}
+
+		tmplContent, err := os.ReadFile(FlagTemplate)
 		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Fprintf(os.Stderr, "failed to read template file: %s\n", err)
 			os.Exit(1)
 		}
+
+		tmpl, err := template.New("template").Parse(string(tmplContent))
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to parse template: %s\n", err)
+			os.Exit(1)
+		}
+
+		err = os.MkdirAll(filepath.Dir(FlagOutput), 0755)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to create output directory: %s\n", err)
+			os.Exit(1)
+		}
+
+		outFile, err := os.Create(FlagOutput)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to create output file: %s\n", err)
+			os.Exit(1)
+		}
+		defer outFile.Close()
+
+		err = tmpl.Execute(outFile, data)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to execute template: %s\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Printf("Rendered template to %s\n", FlagOutput)
 	},
-}
-
-func renderTemplate(templatePath, outputPath string, dataFlags []string) error {
-	data := map[string]interface{}{}
-
-	for _, d := range dataFlags {
-		parts := strings.SplitN(d, "=", 2)
-		if len(parts) != 2 {
-			return fmt.Errorf("invalid data flag format: %s, expected name=path.yaml", d)
-		}
-		name := parts[0]
-		path := parts[1]
-
-		content, err := os.ReadFile(path)
-		if err != nil {
-			return fmt.Errorf("failed to read data file %s: %w", path, err)
-		}
-
-		var parsed interface{}
-		err = yaml.Unmarshal(content, &parsed)
-		if err != nil {
-			return fmt.Errorf("failed to parse YAML file %s: %w", path, err)
-		}
-
-		data[name] = parsed
-	}
-
-	tmplContent, err := os.ReadFile(templatePath)
-	if err != nil {
-		return fmt.Errorf("failed to read template file: %w", err)
-	}
-
-	tmpl, err := template.New("template").Parse(string(tmplContent))
-	if err != nil {
-		return fmt.Errorf("failed to parse template: %w", err)
-	}
-
-	err = os.MkdirAll(filepath.Dir(outputPath), 0755)
-	if err != nil {
-		return fmt.Errorf("failed to create output directory: %w", err)
-	}
-
-	outFile, err := os.Create(outputPath)
-	if err != nil {
-		return fmt.Errorf("failed to create output file: %w", err)
-	}
-	defer outFile.Close()
-
-	err = tmpl.Execute(outFile, data)
-	if err != nil {
-		return fmt.Errorf("failed to execute template: %w", err)
-	}
-
-	fmt.Printf("Rendered template to %s\n", outputPath)
-	return nil
 }
