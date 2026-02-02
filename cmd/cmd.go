@@ -50,6 +50,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes"
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes/connect"
 	_ "github.com/sikalabs/slr/cmd/training/load_kubeconfig"
+	_ "github.com/sikalabs/slr/cmd/training/otp"
 	_ "github.com/sikalabs/slr/cmd/training/save_kubeconfig"
 	_ "github.com/sikalabs/slr/cmd/tree"
 	_ "github.com/sikalabs/slr/cmd/validate_jwt"

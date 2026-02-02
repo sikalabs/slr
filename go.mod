@@ -47,6 +47,7 @@ require (
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208155642-bff3fa861e60
 	github.com/osteele/gojekyll v0.2.16
+	github.com/pquerna/otp v1.5.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
@@ -84,6 +85,7 @@ require (
 	github.com/aybabtme/rgbterm v0.0.0-20170906152045-cc83f3b3ce59 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bep/godartsass/v2 v2.5.0 // indirect
+	github.com/boombuler/barcode v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/danog/blackfriday/v2 v2.1.6 // indirect
