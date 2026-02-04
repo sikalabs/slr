@@ -14,8 +14,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var FlagFrom string
+
 func init() {
 	ondrejsika.Cmd.AddCommand(Cmd)
+	Cmd.Flags().StringVar(&FlagFrom, "from", "", "Start time (e.g. '2026-01-31 18:00:00'), defaults to now")
 }
 
 var Cmd = &cobra.Command{
@@ -29,7 +32,6 @@ var Cmd = &cobra.Command{
 
 const (
 	PhotosDir = "."
-	StartTime = "2026-01-31 18:00:00"
 	TimeZone  = "Europe/Prague"
 )
 
@@ -44,9 +46,14 @@ func setExifTime() {
 		log.Fatal(err)
 	}
 
-	start, err := time.ParseInLocation("2006-01-02 15:04:05", StartTime, loc)
-	if err != nil {
-		log.Fatal(err)
+	var start time.Time
+	if FlagFrom != "" {
+		start, err = time.ParseInLocation("2006-01-02 15:04:05", FlagFrom, loc)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		start = time.Now().In(loc)
 	}
 
 	entries, err := os.ReadDir(PhotosDir)
