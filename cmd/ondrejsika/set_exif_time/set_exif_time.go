@@ -14,11 +14,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var FlagName string
-
 func init() {
 	ondrejsika.Cmd.AddCommand(Cmd)
-	Cmd.Flags().StringVarP(&FlagName, "name", "n", "World", "Name to greet")
 }
 
 var Cmd = &cobra.Command{
