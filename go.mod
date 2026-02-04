@@ -44,6 +44,8 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/go-containerregistry v0.20.7
 	github.com/hashicorp/vault/api v1.22.0
+	github.com/joho/godotenv v1.5.1
+	github.com/lib/pq v1.10.9
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208155642-bff3fa861e60
 	github.com/osteele/gojekyll v0.2.16
@@ -57,6 +59,7 @@ require (
 	github.com/sikalabs/slu v0.96.0
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1
 	github.com/spf13/cobra v1.10.2
+	github.com/xuri/excelize/v2 v2.10.0
 	golang.org/x/oauth2 v0.34.0
 	gopkg.in/yaml.v3 v3.0.1
 	k8s.io/apimachinery v0.34.1
@@ -158,6 +161,8 @@ require (
 	github.com/prometheus/procfs v0.17.0 // indirect
 	github.com/qeesung/image2ascii v1.0.1 // indirect
 	github.com/radovskyb/watcher v1.0.7 // indirect
+	github.com/richardlehane/mscfb v1.0.4 // indirect
+	github.com/richardlehane/msoleps v1.0.4 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
@@ -165,11 +170,14 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
+	github.com/tiendc/go-deepcopy v1.7.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.15 // indirect
 	github.com/tklauser/numcpus v0.10.0 // indirect
 	github.com/wayneashleyberry/terminal-dimensions v1.1.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
+	github.com/xuri/efp v0.0.1 // indirect
+	github.com/xuri/nfp v0.0.2-0.20250530014748-2ddeb826f9a9 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
