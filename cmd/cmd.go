@@ -33,6 +33,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/example"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/export_trainingcrm_attendees"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/prvninakup_notification"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/reverse_fotoskoda_film_photos"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/set_exif_time"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/stegosay"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
