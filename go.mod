@@ -56,7 +56,7 @@ require (
 	github.com/sikalabs/install-slu v0.1.0
 	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
 	github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251106121505-ca9e5b9ed6f8
-	github.com/sikalabs/slu v0.96.0
+	github.com/sikalabs/slu v0.97.0
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1
 	github.com/spf13/cobra v1.10.2
 	github.com/xuri/excelize/v2 v2.10.0

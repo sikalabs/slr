@@ -771,6 +771,8 @@ github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251106121505-ca9e5b9ed
 github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251106121505-ca9e5b9ed6f8/go.mod h1:MjM3P4+LiaO+TZ6WfUTMvbqcrROLPM7Mh45czikftvQ=
 github.com/sikalabs/slu v0.96.0 h1:rjs/CROqKUh+UF3Go24qgaoH9O2eYv/wgqN9WoKT4zc=
 github.com/sikalabs/slu v0.96.0/go.mod h1:NheZ0kyvByegc6677A9CYjSf+3w3/4YL1nXXGqk5Pdc=
+github.com/sikalabs/slu v0.97.0 h1:KbfSIY+J1mhmoH3sSopeQpYWyM4snCtJNepl/NiAkCo=
+github.com/sikalabs/slu v0.97.0/go.mod h1:+Z9z/hCo9epdmOlmmKe1p5GThwjdxlyszfDPaVVd/2o=
 github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1 h1:Y5S3Os23l2Az4/icFHw7VBKtvgfJDGBy1dBsj9xst38=
 github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106010222-3ae1cb81d0b1/go.mod h1:UxZbtZ14+kdJ2HU+I4jc8NpK67a78hIaRy5k1i4GUHo=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=

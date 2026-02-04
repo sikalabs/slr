@@ -4,11 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/sikalabs/slr/cmd/ondrejsika"
+	"github.com/sikalabs/slu/pkg/utils/op_utils"
 	"github.com/spf13/cobra"
 	"github.com/xuri/excelize/v2"
 )
@@ -18,7 +17,6 @@ var FlagOutput string
 
 func init() {
 	ondrejsika.Cmd.AddCommand(Cmd)
-	Cmd.Flags().StringVarP(&FlagEnvFile, "env-file", "e", ".env", "Path to .env file with database credentials")
 	Cmd.Flags().StringVarP(&FlagOutput, "output", "o", "trainingcrm_attendee.xlsx", "Output Excel file path")
 }
 
@@ -27,29 +25,31 @@ var Cmd = &cobra.Command{
 	Short: "Export trainingcrm attendees to Excel",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		err := exportTrainingcrmAttendees(FlagEnvFile, FlagOutput)
+		err := exportTrainingcrmAttendees(FlagOutput)
 		if err != nil {
 			log.Fatal(err)
 		}
 	},
 }
 
-func exportTrainingcrmAttendees(envFile, outputFile string) error {
-	if envFile != "" {
-		_ = godotenv.Load(envFile)
-	}
+func exportTrainingcrmAttendees(outputFile string) error {
+	username, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "username")
+	handleErr(err)
 
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	if port == "" {
-		port = "5432"
-	}
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	dbname := "trainingcrm_sika_io"
+	password, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "password")
+	handleErr(err)
+
+	host, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "host")
+	handleErr(err)
+
+	port, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "port")
+	handleErr(err)
+
+	dbname, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "dbname")
+	handleErr(err)
 
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		host, port, username, password, dbname)
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -110,4 +110,10 @@ func exportTrainingcrmAttendees(envFile, outputFile string) error {
 
 	fmt.Printf("Exported %d rows to %s\n", rowNum-2, outputFile)
 	return nil
+}
+
+func handleErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
