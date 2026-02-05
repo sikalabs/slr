@@ -19,6 +19,7 @@ type OpenShiftCreds struct {
 	Username    string `json:"username"`
 	Password    string `json:"password"`
 	ClusterName string `json:"cluster_name"`
+	ConsoleURL  string `json:"console_url"`
 }
 
 func init() {
@@ -66,6 +67,9 @@ var Cmd = &cobra.Command{
 
 func printCreds(cred OpenShiftCreds) {
 	fmt.Printf("Cluster:  %s\n", cred.ClusterName)
+	if cred.ConsoleURL != "" {
+		fmt.Printf("Console:  %s\n", cred.ConsoleURL)
+	}
 	fmt.Printf("Username: %s\n", cred.Username)
 	fmt.Printf("Password: %s\n", cred.Password)
 }
