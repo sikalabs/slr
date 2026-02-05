@@ -50,6 +50,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/time_exporter"
 	_ "github.com/sikalabs/slr/cmd/training"
 	_ "github.com/sikalabs/slr/cmd/training/az_training_user_creds"
+	_ "github.com/sikalabs/slr/cmd/training/openshift_creds"
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes"
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes/connect"
 	_ "github.com/sikalabs/slr/cmd/training/load_kubeconfig"
