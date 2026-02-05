@@ -56,6 +56,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/training/load_kubeconfig"
 	_ "github.com/sikalabs/slr/cmd/training/otp"
 	_ "github.com/sikalabs/slr/cmd/training/save_kubeconfig"
+	_ "github.com/sikalabs/slr/cmd/training/setup_git"
 	_ "github.com/sikalabs/slr/cmd/tree"
 	_ "github.com/sikalabs/slr/cmd/validate_jwt"
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_from_vault"
