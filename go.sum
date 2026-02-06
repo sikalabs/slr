@@ -767,6 +767,8 @@ github.com/shoenig/test v1.7.0/go.mod h1:UxJ6u/x2v/TNs/LoLxBNJRV9DiwBBKYxXSyczsB
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/sikalabs/install-slu v0.1.0 h1:QSKPLVEUUSsOutDXAgnUDci1w8Fy5tr80jOCA+Blcxg=
 github.com/sikalabs/install-slu v0.1.0/go.mod h1:EzGbW6O9GBNMGDXs3juAqTw33Higj0lKLz3UljtaLOI=
+github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8 h1:MxuP3GjTU4c82FHw7CK+Tl71ywHVwh5JtWZyKjUMFwU=
+github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8/go.mod h1:fjjTxEERMO41iRt1+dcAe8l+VYVklaytqgfQDglQK9I=
 github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552 h1:EiLCh0kiHlgJXz1TKD8mfy3qFgnkFiX9TthlKHO/U8Y=
 github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552/go.mod h1:TrthX6be5utClxOieSRN8T3DOlFZ1oaK/9Ye2oCFaFg=
 github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251106121505-ca9e5b9ed6f8 h1:2iNP8yOVnpc+aLw/cTaqzkLWCh3bwiRC7w4Va9G2xQY=
