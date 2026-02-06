@@ -3,6 +3,7 @@ package save_env_to_file
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -32,6 +33,10 @@ var Cmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fmt.Printf("Environment saved to %s\n", filename)
+		absPath, err := filepath.Abs(filename)
+		if err != nil {
+			absPath = filename
+		}
+		fmt.Printf("Environment saved to %s\n", absPath)
 	},
 }
