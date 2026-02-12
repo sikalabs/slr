@@ -18,6 +18,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/gitlab_create_branch"
 	_ "github.com/sikalabs/slr/cmd/gitlab_create_merge_request"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_file"
+	_ "github.com/sikalabs/slr/cmd/gitlab_update_file_pull_request"
 	_ "github.com/sikalabs/slr/cmd/gitlab_update_files"
 	_ "github.com/sikalabs/slr/cmd/gojekyll"
 	_ "github.com/sikalabs/slr/cmd/install_restart_eno1_systemd"
