@@ -25,6 +25,7 @@ var FlagCommitterName string
 var FlagCommitMessage string
 var FlagMRTitle string
 var FlagMRDescription string
+var FlagAutoMerge bool
 var FlagAssignee string
 var FlagReviewer string
 
@@ -144,6 +145,12 @@ func init() {
 		"",
 		"Merge request description",
 	)
+	Cmd.Flags().BoolVar(
+		&FlagAutoMerge,
+		"auto-merge",
+		false,
+		"Set auto-merge (merge when pipeline succeeds)",
+	)
 	Cmd.Flags().StringVarP(
 		&FlagAssignee,
 		"assignee",
@@ -198,7 +205,11 @@ func gitlabUpdateFilePullRequest(
 		}
 	}
 
-	createMergeRequest(gitlabUrl, token, projectId, assigneeId, reviewerId, branch, sourceBranch, mrTitle, mrDescription)
+	mrIid := createMergeRequest(gitlabUrl, token, projectId, assigneeId, reviewerId, branch, sourceBranch, mrTitle, mrDescription)
+
+	if FlagAutoMerge {
+		setAutoMerge(gitlabUrl, token, projectId, mrIid)
+	}
 }
 
 func createBranch(gitlabUrl, token string, projectId int, branch, source string) {
@@ -260,7 +271,7 @@ func updateFile(gitlabUrl, token string, projectId int, branch, file, content, e
 	}
 }
 
-func createMergeRequest(gitlabUrl, token string, projectId, assigneeId, reviewerId int, sourceBranch, targetBranch, title, description string) {
+func createMergeRequest(gitlabUrl, token string, projectId, assigneeId, reviewerId int, sourceBranch, targetBranch, title, description string) int {
 	apiUrl := fmt.Sprintf("%s/api/v4/projects/%d/merge_requests", gitlabUrl, projectId)
 	jsonData := map[string]interface{}{
 		"source_branch": sourceBranch,
@@ -298,6 +309,41 @@ func createMergeRequest(gitlabUrl, token string, projectId, assigneeId, reviewer
 
 	if resp.StatusCode != 201 {
 		log.Fatalln("Error creating merge request:", resp.Status)
+	}
+
+	var data map[string]interface{}
+	err = json.NewDecoder(resp.Body).Decode(&data)
+	if err != nil {
+		log.Fatalln("Error decoding response:", err)
+	}
+
+	return int(data["iid"].(float64))
+}
+
+func setAutoMerge(gitlabUrl, token string, projectId, mergeRequestIid int) {
+	apiUrl := fmt.Sprintf("%s/api/v4/projects/%d/merge_requests/%d/merge",
+		gitlabUrl, projectId, mergeRequestIid)
+
+	req, err := http.NewRequest("PUT", apiUrl, nil)
+	if err != nil {
+		log.Fatalln("Error creating request:", err)
+	}
+
+	req.Header.Set("PRIVATE-TOKEN", token)
+
+	q := req.URL.Query()
+	q.Add("merge_when_pipeline_succeeds", "true")
+	req.URL.RawQuery = q.Encode()
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalln("Error making request:", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		log.Fatalln("Error setting auto-merge:", resp.Status)
 	}
 }
 
