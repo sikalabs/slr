@@ -18,8 +18,7 @@ var Cmd = &cobra.Command{
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
 		err := exec_utils.ExecShOut(`
-KUBECONFIG=/root/.kube/config &&
-slr get-tls-from-kubernetes \
+KUBECONFIG=/root/.kube/config slr get-tls-from-kubernetes \
   --namespace gitlab-proxy \
   --name gitlab.du.gov.cz-tls \
   --file-cert /tls-cert.pem \
