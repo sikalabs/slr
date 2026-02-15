@@ -9,6 +9,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/copy_to_cloud"
 	_ "github.com/sikalabs/slr/cmd/cpu_load_generator"
 	_ "github.com/sikalabs/slr/cmd/dela"
+	_ "github.com/sikalabs/slr/cmd/du_gitlab_tls_update"
 	_ "github.com/sikalabs/slr/cmd/example"
 	_ "github.com/sikalabs/slr/cmd/get_gps_info_from_jpg"
 	_ "github.com/sikalabs/slr/cmd/get_helm_chart_version_from_repo"
