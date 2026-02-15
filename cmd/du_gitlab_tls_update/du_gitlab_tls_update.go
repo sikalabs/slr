@@ -24,7 +24,9 @@ slr get-tls-from-kubernetes \
   --name gitlab.du.gov.cz-tls \
   --file-cert /tls-cert.pem \
   --file-key /tls-priv.pem &&
-gitlab-ctl restart nginx
+gitlab-ctl restart nginx &&
+echo "DU GitLab TLS update completed successfully" &&
+slr os du-notification "⚠️ DU GitLab TLS update completed successfully"
 `)
 		if err != nil {
 			log.Fatal(err)
