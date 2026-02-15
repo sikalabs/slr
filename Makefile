@@ -15,6 +15,7 @@ endif
 	scp slr-linux-amd64 ${TO}
 
 release:
+	git pull
 	slu go-code version-bump --auto --tag
 	slu go-code version-bump --auto
 	git push
