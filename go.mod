@@ -1,6 +1,6 @@
 module github.com/sikalabs/slr
 
-go 1.25.3
+go 1.25.5
 
 replace (
 	cloud.google.com/go => cloud.google.com/go v0.109.0
