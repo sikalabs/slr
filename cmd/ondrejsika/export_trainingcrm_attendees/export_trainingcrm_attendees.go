@@ -3,10 +3,10 @@ package export_trainingcrm_attendees
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	_ "github.com/lib/pq"
 	"github.com/sikalabs/slr/cmd/ondrejsika"
+	"github.com/sikalabs/slu/pkg/utils/error_utils"
 	"github.com/sikalabs/slu/pkg/utils/op_utils"
 	"github.com/spf13/cobra"
 	"github.com/xuri/excelize/v2"
@@ -26,27 +26,25 @@ var Cmd = &cobra.Command{
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
 		err := exportTrainingcrmAttendees(FlagOutput)
-		if err != nil {
-			log.Fatal(err)
-		}
+		error_utils.HandleError(err)
 	},
 }
 
 func exportTrainingcrmAttendees(outputFile string) error {
 	username, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "username")
-	handleErr(err)
+	error_utils.HandleError(err)
 
 	password, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "password")
-	handleErr(err)
+	error_utils.HandleError(err)
 
 	host, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "host")
-	handleErr(err)
+	error_utils.HandleError(err)
 
 	port, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "port")
-	handleErr(err)
+	error_utils.HandleError(err)
 
 	dbname, err := op_utils.Get("Employee", "TRAININGCRM_SIKA_IO_POSTGRES", "dbname")
-	handleErr(err)
+	error_utils.HandleError(err)
 
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		host, port, username, password, dbname)
@@ -112,8 +110,3 @@ func exportTrainingcrmAttendees(outputFile string) error {
 	return nil
 }
 
-func handleErr(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
-}

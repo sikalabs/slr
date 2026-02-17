@@ -3,7 +3,6 @@ package gitlab_update_file
 import (
 	"encoding/base64"
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -11,6 +10,7 @@ import (
 
 	"github.com/hashicorp/vault/api"
 	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slu/pkg/utils/error_utils"
 	"github.com/spf13/cobra"
 )
 
@@ -80,23 +80,23 @@ func readSecret(vaultAddr, secretPath string) map[string]string {
 	client, err := api.NewClient(&api.Config{
 		Address: vaultAddr,
 	})
-	handleError(err)
+	error_utils.HandleError(err)
 
 	client.SetToken(getTokenFromFile())
 
 	// Read the secret
 	secret, err := client.Logical().Read(secretPathToKV2Path(secretPath))
-	handleError(err)
+	error_utils.HandleError(err)
 
 	// Check if secret data exists
 	if secret == nil || secret.Data == nil {
-		handleError(fmt.Errorf("secret not found at path: %s", secretPathToKV2Path(secretPath)))
+		error_utils.HandleError(fmt.Errorf("secret not found at path: %s", secretPathToKV2Path(secretPath)))
 	}
 
 	// Vault v2 secrets engine stores data in a nested `data` key
 	data, ok := secret.Data["data"].(map[string]interface{})
 	if !ok {
-		handleError(fmt.Errorf("unexpected secret format: %v", secret.Data))
+		error_utils.HandleError(fmt.Errorf("unexpected secret format: %v", secret.Data))
 	}
 
 	output := make(map[string]string)
@@ -108,14 +108,14 @@ func readSecret(vaultAddr, secretPath string) map[string]string {
 
 func getTokenFromFile() string {
 	homeDir, err := os.UserHomeDir()
-	handleError(err)
+	error_utils.HandleError(err)
 
 	tokenPath := filepath.Join(homeDir, ".vault-token")
 
 	// Read token file
 	token, err := os.ReadFile(tokenPath)
 	if err != nil {
-		handleError(err)
+		error_utils.HandleError(err)
 	}
 
 	return string(token)
@@ -126,30 +126,24 @@ func secretPathToKV2Path(secretPath string) string {
 	return fmt.Sprintf("%s/data/%s", s[0], strings.Join(s[1:], "/"))
 }
 
-func handleError(err error) {
-	if err != nil {
-		log.Fatalf("Error: %v", err)
-	}
-}
-
 func sh(command []string) {
 	cmd := exec.Command(command[0], command[1:]...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
-	handleError(err)
+	error_utils.HandleError(err)
 }
 
 func createTmpFile(data string) string {
 	decodedData, err := base64.StdEncoding.DecodeString(data)
-	handleError(err)
+	error_utils.HandleError(err)
 
 	tmpFile, err := os.CreateTemp("", "ca-*.crt")
-	handleError(err)
+	error_utils.HandleError(err)
 
 	tmpFilePath := tmpFile.Name()
 	_, err = tmpFile.Write(decodedData)
-	handleError(err)
+	error_utils.HandleError(err)
 	tmpFile.Close()
 
 	return tmpFilePath

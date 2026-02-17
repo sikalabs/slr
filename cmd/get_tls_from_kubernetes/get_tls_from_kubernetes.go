@@ -2,10 +2,10 @@ package get_tls_from_kubernetes
 
 import (
 	"context"
-	"log"
 	"os"
 
 	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slu/pkg/utils/error_utils"
 	"github.com/spf13/cobra"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -46,7 +46,7 @@ func getTlsFromKubernetes(namespace, name, fileCert, fileKey string) {
 
 func writeFileOrDie(filename, content string) {
 	err := os.WriteFile(filename, []byte(content), 0644)
-	handleError(err)
+	error_utils.HandleError(err)
 }
 
 func getSecretOrDie(namespace, name string) (string, string) {
@@ -54,16 +54,11 @@ func getSecretOrDie(namespace, name string) (string, string) {
 	configOverrides := &clientcmd.ConfigOverrides{}
 	kubeConfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(loadingRules, configOverrides)
 	config, err := kubeConfig.ClientConfig()
-	handleError(err)
+	error_utils.HandleError(err)
 	clientset, err := kubernetes.NewForConfig(config)
-	handleError(err)
+	error_utils.HandleError(err)
 	secret, err := clientset.CoreV1().Secrets(namespace).Get(context.TODO(), name, metav1.GetOptions{})
-	handleError(err)
+	error_utils.HandleError(err)
 	return string(secret.Data["tls.crt"]), string(secret.Data["tls.key"])
 }
 
-func handleError(err error) {
-	if err != nil {
-		log.Fatalln(err)
-	}
-}
