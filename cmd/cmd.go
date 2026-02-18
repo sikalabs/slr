@@ -48,6 +48,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/restart_eno1"
 	"github.com/sikalabs/slr/cmd/root"
 	_ "github.com/sikalabs/slr/cmd/save_env_to_file"
+	_ "github.com/sikalabs/slr/cmd/scan_network"
 	_ "github.com/sikalabs/slr/cmd/s3_backups_cleanup"
 	_ "github.com/sikalabs/slr/cmd/s3_bucket_size"
 	_ "github.com/sikalabs/slr/cmd/scr"
