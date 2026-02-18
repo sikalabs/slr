@@ -6,13 +6,12 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/sikalabs/sikalabs-crypt-go/pkg/sikalabs_crypt"
 	"github.com/sikalabs/slu/pkg/utils/error_utils"
-	"golang.org/x/term"
 
 	"github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slr/internal/training_encryption_utils"
 	"github.com/spf13/cobra"
 )
 
@@ -42,7 +41,7 @@ var Cmd = &cobra.Command{
 	Run: func(c *cobra.Command, args []string) {
 		password := FlagPassword
 		if password == "" {
-			password = readPassword()
+			password = training_encryption_utils.GetPasswordOrDie()
 		}
 
 		resp, err := http.Get(dataURL)
@@ -76,14 +75,6 @@ var Cmd = &cobra.Command{
 			printCreds(creds[0], password)
 		}
 	},
-}
-
-func readPassword() string {
-	fmt.Fprint(os.Stderr, "Encryption Password: ")
-	password, err := term.ReadPassword(int(os.Stdin.Fd()))
-	fmt.Fprintln(os.Stderr)
-	error_utils.HandleError(err)
-	return string(password)
 }
 
 func decryptPassword(encrypted, password string) string {

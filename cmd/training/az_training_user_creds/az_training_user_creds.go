@@ -6,15 +6,14 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/pquerna/otp/totp"
 	"github.com/sikalabs/sikalabs-crypt-go/pkg/sikalabs_crypt"
 	"github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slr/internal/training_encryption_utils"
 	"github.com/sikalabs/slu/pkg/utils/error_utils"
 	"github.com/spf13/cobra"
-	"golang.org/x/term"
 )
 
 const dataURL = "https://raw.githubusercontent.com/ondrejsika/training-cli-data/refs/heads/master/data/azure_training_user.json"
@@ -60,7 +59,7 @@ var Cmd = &cobra.Command{
 
 		password := FlagPassword
 		if needsDecryption && password == "" {
-			password = readPassword()
+			password = training_encryption_utils.GetPasswordOrDie()
 		}
 
 		if user.Password == "" && user.PasswordEncrypted != "" {
@@ -79,14 +78,6 @@ var Cmd = &cobra.Command{
 		fmt.Printf("Password: %s\n", user.Password)
 		fmt.Printf("OTP:      %s-%s\n", code[:3], code[3:])
 	},
-}
-
-func readPassword() string {
-	fmt.Fprint(os.Stderr, "Encryption Password: ")
-	password, err := term.ReadPassword(int(os.Stdin.Fd()))
-	fmt.Fprintln(os.Stderr)
-	error_utils.HandleError(err)
-	return string(password)
 }
 
 func decrypt(encrypted, password string) string {
