@@ -16,10 +16,11 @@ const dataURL = "https://raw.githubusercontent.com/ondrejsika/training-cli-data/
 var FlagAll bool
 
 type OpenShiftCreds struct {
-	Username    string `json:"username"`
-	Password    string `json:"password"`
-	ClusterName string `json:"cluster_name"`
-	ConsoleURL  string `json:"console_url"`
+	Username          string `json:"username"`
+	Password          string `json:"password"`
+	PasswordEncrypted string `json:"password_encrypted"`
+	ClusterName       string `json:"cluster_name"`
+	ConsoleURL        string `json:"console_url"`
 }
 
 func init() {
