@@ -61,6 +61,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes/connect"
 	_ "github.com/sikalabs/slr/cmd/training/load_kubeconfig"
 	_ "github.com/sikalabs/slr/cmd/training/openshift_creds"
+	_ "github.com/sikalabs/slr/cmd/training/openshift_pull_secret"
 	_ "github.com/sikalabs/slr/cmd/training/otp"
 	_ "github.com/sikalabs/slr/cmd/training/save_kubeconfig"
 	_ "github.com/sikalabs/slr/cmd/training/setup_git"
