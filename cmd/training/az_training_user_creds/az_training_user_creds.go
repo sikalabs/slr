@@ -6,23 +6,32 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/pquerna/otp/totp"
+	"github.com/sikalabs/sikalabs-crypt-go/pkg/sikalabs_crypt"
 	"github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slu/pkg/utils/error_utils"
 	"github.com/spf13/cobra"
+	"golang.org/x/term"
 )
 
 const dataURL = "https://raw.githubusercontent.com/ondrejsika/training-cli-data/refs/heads/master/data/azure_training_user.json"
 
+var FlagPassword string
+
 type AzureTrainingUser struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	OTP      string `json:"otp"`
+	Username          string `json:"username"`
+	Password          string `json:"password"`
+	PasswordEncrypted string `json:"password_encrypted"`
+	OTP               string `json:"otp"`
+	OTPEncrypted      string `json:"otp_encrypted"`
 }
 
 func init() {
 	training.Cmd.AddCommand(Cmd)
+	Cmd.Flags().StringVarP(&FlagPassword, "password", "p", "", "Decryption password (prompted if not set)")
 }
 
 var Cmd = &cobra.Command{
@@ -46,6 +55,21 @@ var Cmd = &cobra.Command{
 			log.Fatal("Error parsing JSON: ", err)
 		}
 
+		needsDecryption := (user.Password == "" && user.PasswordEncrypted != "") ||
+			(user.OTP == "" && user.OTPEncrypted != "")
+
+		password := FlagPassword
+		if needsDecryption && password == "" {
+			password = readPassword()
+		}
+
+		if user.Password == "" && user.PasswordEncrypted != "" {
+			user.Password = decrypt(user.PasswordEncrypted, password)
+		}
+		if user.OTP == "" && user.OTPEncrypted != "" {
+			user.OTP = decrypt(user.OTPEncrypted, password)
+		}
+
 		code, err := totp.GenerateCode(user.OTP, time.Now())
 		if err != nil {
 			log.Fatal("Error generating OTP: ", err)
@@ -55,4 +79,18 @@ var Cmd = &cobra.Command{
 		fmt.Printf("Password: %s\n", user.Password)
 		fmt.Printf("OTP:      %s-%s\n", code[:3], code[3:])
 	},
+}
+
+func readPassword() string {
+	fmt.Fprint(os.Stderr, "Encryption Password: ")
+	password, err := term.ReadPassword(int(os.Stdin.Fd()))
+	fmt.Fprintln(os.Stderr)
+	error_utils.HandleError(err)
+	return string(password)
+}
+
+func decrypt(encrypted, password string) string {
+	decrypted, err := sikalabs_crypt.SikaLabsSymmetricDecryptV1(password, encrypted)
+	error_utils.HandleError(err)
+	return decrypted
 }
