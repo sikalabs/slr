@@ -1,6 +1,7 @@
 package lab_notification
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -18,10 +19,10 @@ func init() {
 }
 
 var Cmd = &cobra.Command{
-	Use:     "lab-notification <message>",
+	Use:     "lab-notification [message]",
 	Aliases: []string{"ln"},
 	Short:   "Send a lab notification to Telegram",
-	Args:    cobra.MinimumNArgs(1),
+	Args:    cobra.ArbitraryArgs,
 	Run: func(c *cobra.Command, args []string) {
 		token := readFile("/etc/SLR_TELEGRAM_BOT_TOKEN")
 		chatIDStr := readFile("/etc/SLR_TELEGRAM_CHAT_ID")
@@ -31,11 +32,33 @@ var Cmd = &cobra.Command{
 		}
 		hostname, err := os.Hostname()
 		error_utils.HandleError(err)
-		err = telegram_utils.TelegramSendMessage(
-			token, chatID,
-			fmt.Sprintf("[%s] %s", hostname, strings.Join(args, " ")),
-		)
-		error_utils.HandleError(err)
+
+		stat, _ := os.Stdin.Stat()
+		if (stat.Mode() & os.ModeCharDevice) == 0 {
+			// stdin is a pipe
+			scanner := bufio.NewScanner(os.Stdin)
+			for scanner.Scan() {
+				line := scanner.Text()
+				if line == "" {
+					continue
+				}
+				err = telegram_utils.TelegramSendMessage(
+					token, chatID,
+					fmt.Sprintf("[%s] %s", hostname, line),
+				)
+				error_utils.HandleError(err)
+			}
+			error_utils.HandleError(scanner.Err())
+		} else {
+			if len(args) == 0 {
+				log.Fatalln("No message provided")
+			}
+			err = telegram_utils.TelegramSendMessage(
+				token, chatID,
+				fmt.Sprintf("[%s] %s", hostname, strings.Join(args, " ")),
+			)
+			error_utils.HandleError(err)
+		}
 	},
 }
 
