@@ -37,6 +37,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/backup_file_ducr"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/example"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/export_trainingcrm_attendees"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/lab_notification"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/prvninakup_notification"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/reverse_fotoskoda_film_photos"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/set_exif_time"
