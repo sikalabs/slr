@@ -59,7 +59,7 @@ require (
 	github.com/sikalabs/slu v0.98.0
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106012324-fa849aeac6ab
 	github.com/spf13/cobra v1.10.2
-	github.com/xuri/excelize/v2 v2.10.0
+	github.com/xuri/excelize/v2 v2.10.1
 	golang.org/x/oauth2 v0.35.0
 	golang.org/x/term v0.40.0
 	gopkg.in/yaml.v3 v3.0.1
