@@ -20,6 +20,18 @@ Using [slu](https://github.com/sikalabs/slu)
 slu install-bin slr
 ```
 
+Install latest release using Go
+
+```
+go install github.com/sikalabs/slu/cmd/slu@latest
+```
+
+Install version of master branch using Go
+
+```
+go install github.com/sikalabs/slu/cmd/slu@master
+```
+
 Install on Mac
 
 ```
