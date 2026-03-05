@@ -25,7 +25,10 @@ require (
 	github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8
 	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
 	github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251209230004-bf8ccd2e8d1c
+	github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.1.0
 	github.com/sikalabs/slu v0.99.0
+	github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a
+	github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106012324-fa849aeac6ab
 	github.com/spf13/cobra v1.10.2
 	github.com/xuri/excelize/v2 v2.10.1
@@ -138,9 +141,6 @@ require (
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
-	github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305174856-e5fb516b9d09 // indirect
-	github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a // indirect
-	github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect

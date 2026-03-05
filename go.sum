@@ -492,10 +492,8 @@ github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552 h1:EiLC
 github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552/go.mod h1:TrthX6be5utClxOieSRN8T3DOlFZ1oaK/9Ye2oCFaFg=
 github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251209230004-bf8ccd2e8d1c h1:mt0YTGQNUJuWqkGwkeGnqg1BSJipd8/rLgSsV3zB4XU=
 github.com/sikalabs/sikalabs-kubernetes-homepage v0.0.0-20251209230004-bf8ccd2e8d1c/go.mod h1:MjM3P4+LiaO+TZ6WfUTMvbqcrROLPM7Mh45czikftvQ=
-github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305172913-fd140bf24861 h1:b/bai4PP5pihTQ5fh/V+bSTzrVj8Lf99/OCz8FmT06s=
-github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305172913-fd140bf24861/go.mod h1:w/6wRTij7vdkus8Sneh3yi5ZiDI5Zurzpm3oFyl37SE=
-github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305174856-e5fb516b9d09 h1:GRG38B+84cxVyMl+3SNZrrNwbL9jaH7zh3M9IAM+8Ak=
-github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305174856-e5fb516b9d09/go.mod h1:w/6wRTij7vdkus8Sneh3yi5ZiDI5Zurzpm3oFyl37SE=
+github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.1.0 h1:XC3GJ0+ewLved5KKOH4VzOLkWRHSvqugVppihyz6Rh4=
+github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.1.0/go.mod h1:w/6wRTij7vdkus8Sneh3yi5ZiDI5Zurzpm3oFyl37SE=
 github.com/sikalabs/slu v0.99.0 h1:qD3NLecuXEmADzpJhg377SpKH8UtLs+3j3j/WTxpZ+c=
 github.com/sikalabs/slu v0.99.0/go.mod h1:OC/g8RR5BWJTO58f7ODJq1l+FasUuJT/TChCAMmQ8zQ=
 github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a h1:Gx3vQONoXKE+juMtkqRG7HLg8+YeZ+ExrYzGkHw2EwQ=
