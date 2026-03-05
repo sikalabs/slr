@@ -34,6 +34,8 @@ archives:
 
 release:
   prerelease: auto
+  extra_files:
+    - glob: ./dist/slr_windows_amd64_v1/slr.exe
 
 checksum:
   name_template: "{{ .ProjectName }}_checksums.txt"
