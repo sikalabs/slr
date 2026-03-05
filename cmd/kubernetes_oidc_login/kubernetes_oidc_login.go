@@ -39,10 +39,6 @@ var Cmd = &cobra.Command{
 	},
 }
 
-func example(name string) {
-	fmt.Printf("Hello, %s!\n", name)
-}
-
 type oidcConfig struct {
 	AuthorizationEndpoint string `json:"authorization_endpoint"`
 	TokenEndpoint         string `json:"token_endpoint"`
