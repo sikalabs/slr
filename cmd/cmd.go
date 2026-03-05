@@ -29,6 +29,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/install_restart_eno1_systemd"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/kubernetes_homepage"
+	_ "github.com/sikalabs/slr/cmd/kubernetes_oidc_login"
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_bucket"
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_buckets"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"

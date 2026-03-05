@@ -26,8 +26,8 @@ var FlagClientID string
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
-	Cmd.Flags().StringVar(&FlagIssuer, "issuer-url", "", "OIDC Issuer URL")
-	Cmd.Flags().StringVar(&FlagClientID, "client-id", "", "OIDC Client ID")
+	Cmd.Flags().StringVar(&FlagIssuer, "oidc-issuer-url", "", "OIDC Issuer URL")
+	Cmd.Flags().StringVar(&FlagClientID, "oidc-client-id", "", "OIDC Client ID")
 }
 
 var Cmd = &cobra.Command{
