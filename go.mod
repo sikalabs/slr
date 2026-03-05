@@ -138,6 +138,7 @@ require (
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
+	github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.0.0-20260305174856-e5fb516b9d09 // indirect
 	github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a // indirect
 	github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
