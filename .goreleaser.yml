@@ -44,7 +44,7 @@ checksum:
 
 publishers:
   - name: komac
-    cmd: sh -c 'GITHUB_TOKEN="${KOMAC_GITHUB_TOKEN:-{{ .Env.GITHUB_TOKEN }}}" komac update sikalabs.slr --version {{ .Version }} --urls https://github.com/sikalabs/slr/releases/download/v{{ .Version }}/slr.exe --submit'
+    cmd: sh -c 'GITHUB_TOKEN="{{ if .Env.KOMAC_GITHUB_TOKEN }}{{ .Env.KOMAC_GITHUB_TOKEN }}{{ else }}{{ .Env.GITHUB_TOKEN }}{{ end }}" komac update sikalabs.slr --version {{ .Version }} --urls https://github.com/sikalabs/slr/releases/download/v{{ .Version }}/slr.exe --submit'
 
 brews:
   -
