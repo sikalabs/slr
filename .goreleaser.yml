@@ -4,7 +4,6 @@ project_name: slr
 
 before:
   hooks:
-    - which komac
     - rm -rf ./dist
     - go mod tidy
     - git push
@@ -41,12 +40,6 @@ release:
 checksum:
   name_template: "{{ .ProjectName }}_checksums.txt"
   algorithm: sha256
-
-publishers:
-  - name: komac
-    cmd: komac update sikalabs.slr --version {{ .Version }} --urls https://github.com/sikalabs/slr/releases/download/v{{ .Version }}/slr.exe --submit
-    env:
-      - GITHUB_TOKEN={{ .Env.GITHUB_TOKEN }}
 
 brews:
   -
