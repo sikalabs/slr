@@ -38,6 +38,7 @@ var FlagKeyFile string
 var FlagVaultAddr string
 var FlagVaultToken string
 var FlagVaultPath string
+var FlagStaging bool
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
@@ -53,6 +54,7 @@ func init() {
 	Cmd.Flags().StringVar(&FlagVaultAddr, "vault-addr", "", "Vault server address (e.g. https://vault.example.com)")
 	Cmd.Flags().StringVar(&FlagVaultToken, "vault-token", "", "Vault token")
 	Cmd.Flags().StringVar(&FlagVaultPath, "vault-path", "", "Vault KV2 path to store certificate and key (e.g. secret/data/certs/mysite)")
+	Cmd.Flags().BoolVar(&FlagStaging, "staging", false, "Use Let's Encrypt staging API")
 	_ = Cmd.MarkFlagRequired("domains")
 	_ = Cmd.MarkFlagRequired("email")
 	_ = Cmd.MarkFlagRequired("account-username")
@@ -79,6 +81,7 @@ var Cmd = &cobra.Command{
 			FlagVaultAddr,
 			FlagVaultToken,
 			FlagVaultPath,
+			FlagStaging,
 		)
 	},
 }
@@ -136,6 +139,7 @@ func acme_dns(
 	vaultAddr string,
 	vaultToken string,
 	vaultPath string,
+	staging bool,
 ) {
 	account := goacmedns.Account{
 		Username:   accountUsername,
@@ -156,7 +160,11 @@ func acme_dns(
 	user := &User{Email: email, key: privateKey}
 
 	config := lego.NewConfig(user)
-	config.CADirURL = lego.LEDirectoryProduction
+	if staging {
+		config.CADirURL = lego.LEDirectoryStaging
+	} else {
+		config.CADirURL = lego.LEDirectoryProduction
+	}
 	config.Certificate.KeyType = certcrypto.RSA2048
 
 	client, err := lego.NewClient(config)
