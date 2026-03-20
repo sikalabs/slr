@@ -48,8 +48,8 @@ func init() {
 	Cmd.Flags().StringVar(&FlagAccountPassword, "account-password", "", "ACME DNS account password")
 	Cmd.Flags().StringVar(&FlagAccountFullDomain, "account-full-domain", "", "ACME DNS account full domain")
 	Cmd.Flags().StringVar(&FlagAccountSubDomain, "account-sub-domain", "", "ACME DNS account sub domain")
-	Cmd.Flags().StringVar(&FlagCertFile, "cert-file", "cert.crt", "Output certificate file path")
-	Cmd.Flags().StringVar(&FlagKeyFile, "key-file", "cert.key", "Output private key file path")
+	Cmd.Flags().StringVar(&FlagCertFile, "cert-file", "", "Output certificate file path")
+	Cmd.Flags().StringVar(&FlagKeyFile, "key-file", "", "Output private key file path")
 	Cmd.Flags().StringVar(&FlagVaultAddr, "vault-addr", "", "Vault server address (e.g. https://vault.example.com)")
 	Cmd.Flags().StringVar(&FlagVaultToken, "vault-token", "", "Vault token")
 	Cmd.Flags().StringVar(&FlagVaultPath, "vault-path", "", "Vault KV2 path to store certificate and key (e.g. secret/data/certs/mysite)")
@@ -205,19 +205,28 @@ func acme_dns(
 		log.Fatal(err)
 	}
 
-	if err := os.WriteFile(certFile, cert.Certificate, 0644); err != nil {
-		log.Fatal(err)
-	}
-	if err := os.WriteFile(keyFile, cert.PrivateKey, 0600); err != nil {
-		log.Fatal(err)
+	vaultEnabled := vaultAddr != "" && vaultToken != "" && vaultPath != ""
+	fileEnabled := certFile != "" && keyFile != ""
+
+	if !vaultEnabled && !fileEnabled {
+		log.Fatal("at least one output must be configured: use --cert-file/--key-file, --vault-addr/--vault-token/--vault-path, or both")
 	}
 
 	fmt.Printf("Certificate obtained for: %s\n", strings.Join(domains, ", "))
 	fmt.Printf("Certificate URL: %s\n", cert.CertURL)
-	fmt.Printf("Certificate saved to: %s\n", certFile)
-	fmt.Printf("Private key saved to: %s\n", keyFile)
 
-	if vaultAddr != "" && vaultToken != "" && vaultPath != "" {
+	if fileEnabled {
+		if err := os.WriteFile(certFile, cert.Certificate, 0644); err != nil {
+			log.Fatal(err)
+		}
+		if err := os.WriteFile(keyFile, cert.PrivateKey, 0600); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("Certificate saved to: %s\n", certFile)
+		fmt.Printf("Private key saved to: %s\n", keyFile)
+	}
+
+	if vaultEnabled {
 		vaultConfig := vault.DefaultConfig()
 		vaultConfig.Address = vaultAddr
 		vaultClient, err := vault.NewClient(vaultConfig)
