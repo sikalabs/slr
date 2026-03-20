@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	_ "github.com/sikalabs/slr/cmd/acme_dns"
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/check_docker_credentials"
