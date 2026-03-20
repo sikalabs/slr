@@ -234,8 +234,8 @@ func acme_dns(
 		vaultMount, vaultSecretPath := parts[0], parts[1]
 
 		_, err = vaultClient.KVv2(vaultMount).Put(context.Background(), vaultSecretPath, map[string]interface{}{
-			"certificate": string(cert.Certificate),
-			"private_key": string(cert.PrivateKey),
+			"tls.crt": string(cert.Certificate),
+			"tls.key": string(cert.PrivateKey),
 		})
 		if err != nil {
 			log.Fatal(err)
