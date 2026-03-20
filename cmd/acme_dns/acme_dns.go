@@ -7,11 +7,10 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"strings"
-
-	"fmt"
 
 	"github.com/go-acme/lego/v4/certcrypto"
 	"github.com/go-acme/lego/v4/certificate"
@@ -19,6 +18,7 @@ import (
 	"github.com/go-acme/lego/v4/lego"
 	"github.com/go-acme/lego/v4/providers/dns/acmedns"
 	"github.com/go-acme/lego/v4/registration"
+	vault "github.com/hashicorp/vault/api"
 	"github.com/nrdcg/goacmedns"
 	goacmedns_storage "github.com/nrdcg/goacmedns/storage"
 
@@ -35,6 +35,9 @@ var FlagAccountFullDomain string
 var FlagAccountSubDomain string
 var FlagCertFile string
 var FlagKeyFile string
+var FlagVaultAddr string
+var FlagVaultToken string
+var FlagVaultPath string
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
@@ -47,6 +50,9 @@ func init() {
 	Cmd.Flags().StringVar(&FlagAccountSubDomain, "account-sub-domain", "", "ACME DNS account sub domain")
 	Cmd.Flags().StringVar(&FlagCertFile, "cert-file", "cert.crt", "Output certificate file path")
 	Cmd.Flags().StringVar(&FlagKeyFile, "key-file", "cert.key", "Output private key file path")
+	Cmd.Flags().StringVar(&FlagVaultAddr, "vault-addr", "", "Vault server address (e.g. https://vault.example.com)")
+	Cmd.Flags().StringVar(&FlagVaultToken, "vault-token", "", "Vault token")
+	Cmd.Flags().StringVar(&FlagVaultPath, "vault-path", "", "Vault KV2 path to store certificate and key (e.g. secret/data/certs/mysite)")
 	_ = Cmd.MarkFlagRequired("domains")
 	_ = Cmd.MarkFlagRequired("email")
 	_ = Cmd.MarkFlagRequired("account-username")
@@ -70,6 +76,9 @@ var Cmd = &cobra.Command{
 			FlagAccountSubDomain,
 			FlagCertFile,
 			FlagKeyFile,
+			FlagVaultAddr,
+			FlagVaultToken,
+			FlagVaultPath,
 		)
 	},
 }
@@ -124,6 +133,9 @@ func acme_dns(
 	accountSubDomain string,
 	certFile string,
 	keyFile string,
+	vaultAddr string,
+	vaultToken string,
+	vaultPath string,
 ) {
 	account := goacmedns.Account{
 		Username:   accountUsername,
@@ -204,4 +216,30 @@ func acme_dns(
 	fmt.Printf("Certificate URL: %s\n", cert.CertURL)
 	fmt.Printf("Certificate saved to: %s\n", certFile)
 	fmt.Printf("Private key saved to: %s\n", keyFile)
+
+	if vaultAddr != "" && vaultToken != "" && vaultPath != "" {
+		vaultConfig := vault.DefaultConfig()
+		vaultConfig.Address = vaultAddr
+		vaultClient, err := vault.NewClient(vaultConfig)
+		if err != nil {
+			log.Fatal(err)
+		}
+		vaultClient.SetToken(vaultToken)
+
+		// vaultPath format: <mount>/<secret-path>, e.g. "secret/certs/mysite"
+		parts := strings.SplitN(vaultPath, "/", 2)
+		if len(parts) != 2 {
+			log.Fatalf("--vault-path must be in format <mount>/<secret-path>, got: %s", vaultPath)
+		}
+		vaultMount, vaultSecretPath := parts[0], parts[1]
+
+		_, err = vaultClient.KVv2(vaultMount).Put(context.Background(), vaultSecretPath, map[string]interface{}{
+			"certificate": string(cert.Certificate),
+			"private_key": string(cert.PrivateKey),
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("Certificate stored in Vault at: %s\n", vaultPath)
+	}
 }
