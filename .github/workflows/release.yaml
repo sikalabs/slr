@@ -11,9 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
-      - name: Install komac
-        run: |
-          curl -sL $(curl -s https://api.github.com/repos/russellbanks/Komac/releases/latest | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name'].endswith('_amd64.deb')))") -o komac.deb && sudo dpkg -i komac.deb && rm komac.deb
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
