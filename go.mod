@@ -13,7 +13,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/go-containerregistry v0.21.1
-	github.com/hashicorp/vault/api v1.22.0
+	github.com/hashicorp/vault/api v1.23.0
 	github.com/lib/pq v1.11.2
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/nrdcg/goacmedns v0.2.0
