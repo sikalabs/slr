@@ -35,6 +35,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_bucket"
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_buckets"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
+	_ "github.com/sikalabs/slr/cmd/otp"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_ad_to_readme"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_claude_md_from_sikalabs_slu"
