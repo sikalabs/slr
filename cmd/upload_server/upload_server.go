@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/sikalabs/slr/cmd/root"
+	"github.com/sikalabs/slr/version"
 	"github.com/spf13/cobra"
 )
 
@@ -43,11 +44,16 @@ func randomString(n int) string {
 
 func runServer() {
 	mux := http.NewServeMux()
+	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/upload", uploadHandler)
 	mux.Handle("/files/", http.StripPrefix("/files/", http.FileServer(http.Dir(FlagDataDir))))
 
 	fmt.Println("Listen on 0.0.0.0:8000, see http://127.0.0.1:8000")
 	http.ListenAndServe(":8000", mux)
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "slr upload-server, slr version %s\n", version.Version)
 }
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
