@@ -76,6 +76,8 @@ import (
 	_ "github.com/sikalabs/slr/cmd/training/set_encryption_password"
 	_ "github.com/sikalabs/slr/cmd/training/setup_git"
 	_ "github.com/sikalabs/slr/cmd/tree"
+	_ "github.com/sikalabs/slr/cmd/upload"
+	_ "github.com/sikalabs/slr/cmd/upload_server"
 	_ "github.com/sikalabs/slr/cmd/validate_jwt"
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_from_vault"
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_to_vault"
