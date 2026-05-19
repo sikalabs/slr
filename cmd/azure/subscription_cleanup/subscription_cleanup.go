@@ -19,14 +19,18 @@ const (
 	subscriptionSikaLabsDevOpenShiftName = "sikalabs-dev-openshift"
 	subscriptionSikaLabsTrainingID       = "200acaec-2d60-43ad-915a-e8f5352a4ba7"
 	subscriptionSikaLabsTrainingName     = "sikalabs-training"
+	subscriptionSikaLabsDevID            = "5768238c-1ecd-49ab-83cc-b09bf70a7bff"
+	subscriptionSikaLabsDevName          = "sikalabs-dev"
 )
 
 var skipResourceGroups = map[string][]string{
 	subscriptionSikaLabsDevOpenShiftID: {},
 	subscriptionSikaLabsTrainingID:     {},
+	subscriptionSikaLabsDevID:          {},
 }
 
 var (
+	FlagSubscriptionSikaLabsDev          bool
 	FlagSubscriptionSikaLabsDevOpenShift bool
 	FlagSubscriptionSikaLabsTraining     bool
 	FlagDryRun                           bool
@@ -34,6 +38,7 @@ var (
 
 func init() {
 	azure.Cmd.AddCommand(Cmd)
+	Cmd.Flags().BoolVar(&FlagSubscriptionSikaLabsDev, "subscription-sikalabs-dev", false, "Clean up subscription "+subscriptionSikaLabsDevName+" ("+subscriptionSikaLabsDevID+")")
 	Cmd.Flags().BoolVar(&FlagSubscriptionSikaLabsDevOpenShift, "subscription-sikalabs-dev-openshift", false, "Clean up subscription "+subscriptionSikaLabsDevOpenShiftName+" ("+subscriptionSikaLabsDevOpenShiftID+")")
 	Cmd.Flags().BoolVar(&FlagSubscriptionSikaLabsTraining, "subscription-sikalabs-training", false, "Clean up subscription "+subscriptionSikaLabsTrainingName+" ("+subscriptionSikaLabsTrainingID+")")
 	Cmd.Flags().BoolVar(&FlagDryRun, "dry-run", false, "List resources without deleting anything")
@@ -44,13 +49,22 @@ var Cmd = &cobra.Command{
 	Short: "Clean up an entire Azure subscription (only allowed subscriptions)",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		if FlagSubscriptionSikaLabsDevOpenShift == FlagSubscriptionSikaLabsTraining {
-			log.Fatal("Error: specify exactly one of --subscription-sikalabs-dev-openshift or --subscription-sikalabs-training")
+		selected := 0
+		for _, f := range []bool{FlagSubscriptionSikaLabsDev, FlagSubscriptionSikaLabsDevOpenShift, FlagSubscriptionSikaLabsTraining} {
+			if f {
+				selected++
+			}
+		}
+		if selected != 1 {
+			log.Fatal("Error: specify exactly one of --subscription-sikalabs-dev, --subscription-sikalabs-dev-openshift, or --subscription-sikalabs-training")
 		}
 
 		subscriptionID := subscriptionSikaLabsTrainingID
 		subscriptionName := subscriptionSikaLabsTrainingName
-		if FlagSubscriptionSikaLabsDevOpenShift {
+		if FlagSubscriptionSikaLabsDev {
+			subscriptionID = subscriptionSikaLabsDevID
+			subscriptionName = subscriptionSikaLabsDevName
+		} else if FlagSubscriptionSikaLabsDevOpenShift {
 			subscriptionID = subscriptionSikaLabsDevOpenShiftID
 			subscriptionName = subscriptionSikaLabsDevOpenShiftName
 		}
