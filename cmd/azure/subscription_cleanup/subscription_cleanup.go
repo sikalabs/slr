@@ -26,7 +26,7 @@ const (
 var skipResourceGroups = map[string][]string{
 	subscriptionSikaLabsDevOpenShiftID: {},
 	subscriptionSikaLabsTrainingID:     {},
-	subscriptionSikaLabsDevID:          {},
+	subscriptionSikaLabsDevID:          {"zone"},
 }
 
 var (
