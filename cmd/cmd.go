@@ -99,6 +99,11 @@ import (
 func Execute() {
 	if filepath.Base(os.Args[0]) == "training-cli" {
 		// If the binary is named "training-cli", execute the "slr training" command directly
+
+		// Override the "Use" and "Aliases" fields of the training command to make it work as a standalone command
+		training.Cmd.Use = "training-cli"
+		training.Cmd.Aliases = []string{}
+
 		cobra.CheckErr(training.Cmd.Execute())
 	} else {
 		// Otherwise, execute the root command which includes "training" as a subcommand
