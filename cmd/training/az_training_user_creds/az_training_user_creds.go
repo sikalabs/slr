@@ -79,8 +79,7 @@ var Cmd = &cobra.Command{
 
 		fmt.Printf("Username: %s\n", user.Username)
 		fmt.Printf("Password: %s\n", user.Password)
-		fmt.Printf("OTP:      %s-%s\n", code[:3], code[3:])
-		fmt.Printf("          %s  (without dash)\n", code)
+		fmt.Printf("OTP:      %s\n", code)
 		fmt.Printf("          %ds left\n", secondsLeft)
 	},
 }
