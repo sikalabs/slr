@@ -3,6 +3,9 @@
 build:
 	go build
 
+symlink:
+	ln -sf $(shell pwd)/slr $(shell dirname $(shell which slr))/training-cli
+
 build-linux-amd64:
 	GOOS=linux GOARCH=amd64 go build -o slr-linux-amd64
 

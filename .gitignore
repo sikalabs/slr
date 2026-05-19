@@ -17,6 +17,8 @@ Makefile.local.mk
 # Go
 slr
 slr-linux-amd64
+/training-cli
+/training-cli-linux-amd64
 *.exe
 /dist/**
 cobra-docs

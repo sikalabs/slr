@@ -1,10 +1,13 @@
 package cmd
 
 import (
+	"os"
+	"path/filepath"
+
 	_ "github.com/sikalabs/slr/cmd/acme_dns"
+	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/azure"
 	_ "github.com/sikalabs/slr/cmd/azure/subscription_cleanup"
-	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/check_docker_credentials"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
@@ -38,7 +41,6 @@ import (
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_buckets"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
 	_ "github.com/sikalabs/slr/cmd/nothing"
-	_ "github.com/sikalabs/slr/cmd/otp"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_ad_to_readme"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_claude_md_from_sikalabs_slu"
@@ -50,9 +52,10 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/lab_notification"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/prvninakup_notification"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/reverse_fotoskoda_film_photos"
-	_ "github.com/sikalabs/slr/cmd/ondrejsika/setup_upload_server"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/set_exif_time"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/setup_upload_server"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/stegosay"
+	_ "github.com/sikalabs/slr/cmd/otp"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	_ "github.com/sikalabs/slr/cmd/render_template"
@@ -69,7 +72,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/suffix"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
 	_ "github.com/sikalabs/slr/cmd/time_exporter"
-	_ "github.com/sikalabs/slr/cmd/training"
+	"github.com/sikalabs/slr/cmd/training"
 	_ "github.com/sikalabs/slr/cmd/training/az_training_user_creds"
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes"
 	_ "github.com/sikalabs/slr/cmd/training/kubernetes/connect"
@@ -94,5 +97,12 @@ import (
 )
 
 func Execute() {
-	cobra.CheckErr(root.Cmd.Execute())
+	if filepath.Base(os.Args[0]) == "training-cli" {
+		// If the binary is named "training-cli", execute the "slr training" command directly
+		cobra.CheckErr(training.Cmd.Execute())
+	} else {
+		// Otherwise, execute the root command which includes "training" as a subcommand
+		root.Cmd.AddCommand(training.Cmd)
+		cobra.CheckErr(root.Cmd.Execute())
+	}
 }
