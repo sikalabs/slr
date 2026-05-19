@@ -74,10 +74,14 @@ var Cmd = &cobra.Command{
 			log.Fatal("Error generating OTP: ", err)
 		}
 
+		now := time.Now()
+		secondsLeft := 30 - (now.Unix() % 30)
+
 		fmt.Printf("Username: %s\n", user.Username)
 		fmt.Printf("Password: %s\n", user.Password)
 		fmt.Printf("OTP:      %s-%s\n", code[:3], code[3:])
 		fmt.Printf("          %s  (without dash)\n", code)
+		fmt.Printf("          %ds left\n", secondsLeft)
 	},
 }
 
