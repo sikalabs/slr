@@ -21,6 +21,11 @@ const (
 	subscriptionSikaLabsTrainingName     = "sikalabs-training"
 )
 
+var skipResourceGroups = map[string][]string{
+	subscriptionSikaLabsDevOpenShiftID: {},
+	subscriptionSikaLabsTrainingID:     {},
+}
+
 var (
 	FlagSubscriptionSikaLabsDevOpenShift bool
 	FlagSubscriptionSikaLabsTraining     bool
@@ -77,6 +82,9 @@ var Cmd = &cobra.Command{
 				log.Fatal("Error listing resource groups: ", err)
 			}
 			for _, rg := range page.Value {
+				if isSkipped(subscriptionID, *rg.Name) {
+					continue
+				}
 				resourceGroups = append(resourceGroups, *rg.Name)
 			}
 		}
@@ -139,4 +147,13 @@ var Cmd = &cobra.Command{
 
 		fmt.Println("\nCleanup complete.")
 	},
+}
+
+func isSkipped(subscriptionID, rgName string) bool {
+	for _, name := range skipResourceGroups[subscriptionID] {
+		if name == rgName {
+			return true
+		}
+	}
+	return false
 }
