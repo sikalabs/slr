@@ -91,6 +91,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/vault_copy_file_to_vault"
 	_ "github.com/sikalabs/slr/cmd/vault_filler"
 	_ "github.com/sikalabs/slr/cmd/vault_init_unseal"
+	_ "github.com/sikalabs/slr/cmd/vault_k8s_get"
 	_ "github.com/sikalabs/slr/cmd/version"
 	_ "github.com/sikalabs/slr/cmd/vibe"
 	"github.com/spf13/cobra"
