@@ -23,13 +23,13 @@ slu install-bin slr
 Install latest release using Go
 
 ```
-go install github.com/sikalabs/slu/cmd/slu@latest
+go install github.com/sikalabs/slr@latest
 ```
 
 Install version of master branch using Go
 
 ```
-go install github.com/sikalabs/slu/cmd/slu@master
+go install github.com/sikalabs/slr@master
 ```
 
 Install on Mac
