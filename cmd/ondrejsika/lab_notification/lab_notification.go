@@ -24,8 +24,8 @@ var Cmd = &cobra.Command{
 	Short:   "Send a lab notification to Telegram",
 	Args:    cobra.ArbitraryArgs,
 	Run: func(c *cobra.Command, args []string) {
-		token := readFile("/etc/SLR_TELEGRAM_BOT_TOKEN")
-		chatIDStr := readFile("/etc/SLR_TELEGRAM_CHAT_ID")
+		token := readFileFromPaths("SLR_TELEGRAM_BOT_TOKEN", "/etc/SLR_TELEGRAM_BOT_TOKEN", "~/.SLR_TELEGRAM_BOT_TOKEN")
+		chatIDStr := readFileFromPaths("SLR_TELEGRAM_CHAT_ID", "/etc/SLR_TELEGRAM_CHAT_ID", "~/.SLR_TELEGRAM_CHAT_ID")
 		chatID, err := strconv.ParseInt(chatIDStr, 10, 64)
 		if err != nil {
 			log.Fatalln("Invalid TELEGRAM_CHAT_ID:", err)
@@ -62,10 +62,17 @@ var Cmd = &cobra.Command{
 	},
 }
 
-func readFile(path string) string {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		log.Fatalf("Failed to read %s: %v\n", path, err)
+func readFileFromPaths(name string, paths ...string) string {
+	home, _ := os.UserHomeDir()
+	for _, path := range paths {
+		if strings.HasPrefix(path, "~/") {
+			path = home + path[1:]
+		}
+		data, err := os.ReadFile(path)
+		if err == nil {
+			return strings.TrimSpace(string(data))
+		}
 	}
-	return strings.TrimSpace(string(data))
+	log.Fatalf("Failed to read %s from any of: %v\n", name, paths)
+	return ""
 }
