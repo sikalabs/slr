@@ -520,6 +520,8 @@ github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76 h1:9stSIMVUsMHf9N
 github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76/go.mod h1:wji77Zy5OYY1b9ASBRUMGLV4dBIdq13ik3Jzu6f98YQ=
 github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106012324-fa849aeac6ab h1:mkDjj9oKbT44LwhtpIt+EgZo5yGDrdpaWVF5AeXfyi8=
 github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106012324-fa849aeac6ab/go.mod h1:UxZbtZ14+kdJ2HU+I4jc8NpK67a78hIaRy5k1i4GUHo=
+github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20260604000943-b33f0c144930 h1:XZglEhh4Ky488v/4Sr/pJIZ4pAV4BYJPmraqjWDq+Ok=
+github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20260604000943-b33f0c144930/go.mod h1:UxZbtZ14+kdJ2HU+I4jc8NpK67a78hIaRy5k1i4GUHo=
 github.com/sirupsen/logrus v1.9.4 h1:TsZE7l11zFCLZnZ+teH4Umoq5BhEIfIzfRDZ1Uzql2w=
 github.com/sirupsen/logrus v1.9.4/go.mod h1:ftWc9WdOfJ0a92nsE2jF5u5ZwH8Bv2zdeOC42RjbV2g=
 github.com/smarty/assertions v1.15.0 h1:cR//PqUBUiQRakZWqBiFFQ9wb8emQGDb0HeGdqGByCY=

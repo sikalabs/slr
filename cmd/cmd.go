@@ -55,6 +55,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/set_exif_time"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/setup_upload_server"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/stegosay"
+	_ "github.com/sikalabs/slr/cmd/ondrejsika/telegram_ci"
 	_ "github.com/sikalabs/slr/cmd/otp"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"

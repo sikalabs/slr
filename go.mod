@@ -33,7 +33,7 @@ require (
 	github.com/sikalabs/slu v0.99.0
 	github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a
 	github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76
-	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20251106012324-fa849aeac6ab
+	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20260604000943-b33f0c144930
 	github.com/spf13/cobra v1.10.2
 	github.com/xuri/excelize/v2 v2.10.1
 	golang.org/x/oauth2 v0.36.0
