@@ -12,6 +12,7 @@
 *.local.sh
 *.local.yml
 *.local.yaml
+*.local.json
 Makefile.local.mk
 
 # Go
