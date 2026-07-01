@@ -1,2 +1,3 @@
 FROM debian:12-slim
-COPY slr /usr/local/bin/
+ARG TARGETPLATFORM
+COPY $TARGETPLATFORM/slr /usr/local/bin/

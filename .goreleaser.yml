@@ -58,48 +58,26 @@ brews:
     test: |
       system "#{bin}/slr version"
 
-dockers:
-    -
-      goos: linux
-      goarch: amd64
-      image_templates:
-        - "ghcr.io/sikalabs/slr:{{ .Tag }}"
-      dockerfile: Dockerfile.goreleaser
-      ids:
-        - slr
-      build_flag_templates:
-        - "--platform=linux/amd64"
-        - "--label=org.opencontainers.image.created={{.Date}}"
-        - "--label=org.opencontainers.image.title={{.ProjectName}}"
-        - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-        - "--label=org.opencontainers.image.version={{.Version}}"
-        - "--label=org.opencontainers.image.source=https://github.com/sikalabs/slr"
-        - "--label=org.label-schema.schema-version=1.0"
-        - "--label=org.label-schema.version={{.Version}}"
-        - "--label=org.label-schema.name={{.ProjectName}}"
-        - "--label=com.github.actions.name={{.ProjectName}}"
-        - "--label=repository=https://github.com/sikalabs/slr"
-        - "--label=maintainer=SikaLabs <opensource@sikalabs.com>"
-    - goos: linux
-      goarch: arm64
-      image_templates:
-        - "sikalabs/slu:{{ .Tag }}-arm64v8"
-      dockerfile: Dockerfile.goreleaser.arm64v8
-      ids:
-        - slu
-      build_flag_templates:
-        - "--platform=linux/arm64"
-        - "--label=org.opencontainers.image.created={{.Date}}"
-        - "--label=org.opencontainers.image.title={{.ProjectName}}"
-        - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-        - "--label=org.opencontainers.image.version={{.Version}}"
-        - "--label=org.opencontainers.image.source=https://github.com/sikalabs/slr"
-        - "--label=org.label-schema.schema-version=1.0"
-        - "--label=org.label-schema.version={{.Version}}"
-        - "--label=org.label-schema.name={{.ProjectName}}"
-        - "--label=com.github.actions.name={{.ProjectName}}"
-        - "--label=repository=https://github.com/sikalabs/slr"
-        - "--label=maintainer=SikaLabs Opensource &lt;opensource@sikalabs.com&gt;"
+dockers_v2:
+  - dockerfile: Dockerfile.goreleaser
+    ids:
+      - slr
+    images:
+      - "ghcr.io/sikalabs/slr"
+    tags:
+      - "{{ .Tag }}"
+    labels:
+      "org.opencontainers.image.created": "{{.Date}}"
+      "org.opencontainers.image.title": "{{.ProjectName}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.version": "{{.Version}}"
+      "org.opencontainers.image.source": "https://github.com/sikalabs/slr"
+      "org.label-schema.schema-version": "1.0"
+      "org.label-schema.version": "{{.Version}}"
+      "org.label-schema.name": "{{.ProjectName}}"
+      "com.github.actions.name": "{{.ProjectName}}"
+      "repository": "https://github.com/sikalabs/slr"
+      "maintainer": "SikaLabs <opensource@sikalabs.com>"
 
 scoops:
   -
