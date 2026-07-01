@@ -17,8 +17,11 @@ type State struct {
 	Increment int    `json:"increment"`
 }
 
+var FlagRead bool
+
 func init() {
 	root.Cmd.AddCommand(Cmd)
+	Cmd.Flags().BoolVar(&FlagRead, "read", false, "Only read the current tag from the state file, without incrementing it")
 }
 
 var Cmd = &cobra.Command{
@@ -26,10 +29,30 @@ var Cmd = &cobra.Command{
 	Short: "Prints and saves the next dev docker tag, e.g. 2026-07-01.0",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
+		if FlagRead {
+			tag, err := readDevDockerTag()
+			cobra.CheckErr(err)
+			fmt.Println(tag)
+			return
+		}
+
 		tag, err := nextDevDockerTag(time.Now())
 		cobra.CheckErr(err)
 		fmt.Println(tag)
 	},
+}
+
+func readDevDockerTag() (string, error) {
+	if _, err := os.Stat(StateFile); os.IsNotExist(err) {
+		return "", fmt.Errorf("no state file found at %s", StateFile)
+	}
+
+	state, err := loadState()
+	if err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf("%s.%d", state.Date, state.Increment), nil
 }
 
 func nextDevDockerTag(now time.Time) (string, error) {
