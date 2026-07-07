@@ -16,7 +16,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/go-containerregistry v0.21.6
 	github.com/hashicorp/vault/api v1.23.0
-	github.com/lib/pq v1.11.2
+	github.com/lib/pq v1.12.3
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/nrdcg/goacmedns v0.2.0
 	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208165230-e89dec843c6f
