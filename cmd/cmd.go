@@ -71,6 +71,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/scr"
 	_ "github.com/sikalabs/slr/cmd/servers_md"
 	_ "github.com/sikalabs/slr/cmd/static_hash_tagger"
+	_ "github.com/sikalabs/slr/cmd/stream_kubernetes_events_to_mongodb"
 	_ "github.com/sikalabs/slr/cmd/suffix"
 	_ "github.com/sikalabs/slr/cmd/test_clisso_cli"
 	_ "github.com/sikalabs/slr/cmd/time_exporter"
