@@ -19,7 +19,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/nrdcg/goacmedns v0.2.0
-	github.com/ondrejsikax/bark v0.0.0-20260804145301-6ba7203ebc3a
+	github.com/ondrejsikax/bark v0.0.0-20260805132556-5989e3b66e8e
 	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208165230-e89dec843c6f
 	github.com/osteele/gojekyll v0.3.1
 	github.com/pquerna/otp v1.5.0
@@ -80,7 +80,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/docker/cli v29.5.3+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.5 // indirect
-	github.com/ebitengine/purego v0.4.1 // indirect
+	github.com/ebitengine/purego v0.10.2 // indirect
 	github.com/emicklei/go-restful/v3 v3.13.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
