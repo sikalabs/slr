@@ -1,6 +1,6 @@
 module github.com/sikalabs/slr
 
-go 1.26.0
+go 1.26.2
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.14.0
@@ -19,6 +19,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/mlosinsky/clisso/ssoclient v1.0.0
 	github.com/nrdcg/goacmedns v0.2.0
+	github.com/ondrejsikax/bark v0.0.0-20260804145301-6ba7203ebc3a
 	github.com/ondrejsikax/simple-key-value-storage v0.0.0-20251208165230-e89dec843c6f
 	github.com/osteele/gojekyll v0.3.1
 	github.com/pquerna/otp v1.5.0
@@ -79,6 +80,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/docker/cli v29.5.3+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.5 // indirect
+	github.com/ebitengine/purego v0.4.1 // indirect
 	github.com/emicklei/go-restful/v3 v3.13.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
@@ -106,6 +108,8 @@ require (
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/uuid v1.6.1-0.20241114170450-2d3c2a9cc518 // indirect
 	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674 // indirect
+	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
+	github.com/hajimehoshi/oto/v2 v2.4.3 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect

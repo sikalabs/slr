@@ -8,6 +8,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/azure"
 	_ "github.com/sikalabs/slr/cmd/azure/subscription_cleanup"
+	_ "github.com/sikalabs/slr/cmd/bark"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/check_docker_credentials"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
