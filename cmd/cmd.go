@@ -21,6 +21,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/example"
 	_ "github.com/sikalabs/slr/cmd/get_gps_info_from_jpg"
 	_ "github.com/sikalabs/slr/cmd/get_helm_chart_version_from_repo"
+	_ "github.com/sikalabs/slr/cmd/get_hw_info"
 	_ "github.com/sikalabs/slr/cmd/get_jwt_from_oidc"
 	_ "github.com/sikalabs/slr/cmd/get_nodes_from_kubernetes"
 	_ "github.com/sikalabs/slr/cmd/get_tls_from_kubernetes"
