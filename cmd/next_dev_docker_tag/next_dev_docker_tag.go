@@ -10,7 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const StateFile = ".next_dev_docker_tag.local.json"
+const StateFileBase = ".next_dev_docker_tag"
+const StateFileExt = ".local.json"
 
 type State struct {
 	Date      string `json:"date"`
@@ -18,10 +19,19 @@ type State struct {
 }
 
 var FlagRead bool
+var FlagKey string
 
 func init() {
 	root.Cmd.AddCommand(Cmd)
 	Cmd.Flags().BoolVar(&FlagRead, "read", false, "Only read the current tag from the state file, without incrementing it")
+	Cmd.Flags().StringVar(&FlagKey, "key", "", "Key to allow multiple independent counters in the same folder")
+}
+
+func stateFile() string {
+	if FlagKey == "" {
+		return StateFileBase + StateFileExt
+	}
+	return StateFileBase + "." + FlagKey + StateFileExt
 }
 
 var Cmd = &cobra.Command{
@@ -43,8 +53,8 @@ var Cmd = &cobra.Command{
 }
 
 func readDevDockerTag() (string, error) {
-	if _, err := os.Stat(StateFile); os.IsNotExist(err) {
-		return "", fmt.Errorf("no state file found at %s", StateFile)
+	if _, err := os.Stat(stateFile()); os.IsNotExist(err) {
+		return "", fmt.Errorf("no state file found at %s", stateFile())
 	}
 
 	state, err := loadState()
@@ -78,7 +88,7 @@ func nextDevDockerTag(now time.Time) (string, error) {
 }
 
 func loadState() (*State, error) {
-	data, err := os.ReadFile(StateFile)
+	data, err := os.ReadFile(stateFile())
 	if os.IsNotExist(err) {
 		return &State{}, nil
 	}
@@ -98,5 +108,5 @@ func saveState(state *State) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(StateFile, data, 0644)
+	return os.WriteFile(stateFile(), data, 0644)
 }
