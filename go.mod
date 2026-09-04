@@ -36,7 +36,7 @@ require (
 	github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76
 	github.com/sikalabsx/sikalabs-encrypted-go v0.0.0-20260604000943-b33f0c144930
 	github.com/spf13/cobra v1.10.2
-	github.com/xuri/excelize/v2 v2.10.1
+	github.com/xuri/excelize/v2 v2.11.0
 	go.mongodb.org/mongo-driver/v2 v2.8.0
 	golang.org/x/oauth2 v0.36.0
 	golang.org/x/term v0.45.0
@@ -150,7 +150,7 @@ require (
 	github.com/prometheus/procfs v0.21.1 // indirect
 	github.com/qeesung/image2ascii v1.0.1 // indirect
 	github.com/radovskyb/watcher v1.0.7 // indirect
-	github.com/richardlehane/mscfb v1.0.6 // indirect
+	github.com/richardlehane/mscfb v1.0.7 // indirect
 	github.com/richardlehane/msoleps v1.0.6 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
