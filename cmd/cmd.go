@@ -42,6 +42,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_bucket"
 	_ "github.com/sikalabs/slr/cmd/list_mimio_s3_buckets"
 	_ "github.com/sikalabs/slr/cmd/memory_usage"
+	_ "github.com/sikalabs/slr/cmd/migrate_mysql_database"
 	_ "github.com/sikalabs/slr/cmd/next_dev_docker_tag"
 	_ "github.com/sikalabs/slr/cmd/nothing"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika"
