@@ -26,7 +26,7 @@ require (
 	github.com/prometheus/client_golang v1.24.1
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
-	github.com/sikalabs/go-scripts v0.0.0-20260909143150-b8dc67575847
+	github.com/sikalabs/go-scripts v0.0.0-20260909150215-ae33195cf695
 	github.com/sikalabs/install-slu v0.1.0
 	github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8
 	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
