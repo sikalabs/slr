@@ -155,6 +155,7 @@ require (
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.7 // indirect
 	github.com/sikalabs/dogsay v0.2.0 // indirect
+	github.com/sikalabsx/go-scripts-test v0.0.0-20260909113857-70ed2c396398 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tdewolff/minify v2.3.6+incompatible // indirect

@@ -525,6 +525,8 @@ github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.2.0 h1:k1qWdyopS6xSCWENF3x
 github.com/sikalabs/sikalabs-kubernetes-oidc-login v0.2.0/go.mod h1:1PRFzBGa9aUwOF0tjQyUaaVgXUqYMpFiTrtIp7sEZWE=
 github.com/sikalabs/slu v0.99.0 h1:qD3NLecuXEmADzpJhg377SpKH8UtLs+3j3j/WTxpZ+c=
 github.com/sikalabs/slu v0.99.0/go.mod h1:OC/g8RR5BWJTO58f7ODJq1l+FasUuJT/TChCAMmQ8zQ=
+github.com/sikalabsx/go-scripts-test v0.0.0-20260909113857-70ed2c396398 h1:9Iqf5C1pTG87HzRBFrV2D/tKXcbry9CQXMMV0Cwwzt4=
+github.com/sikalabsx/go-scripts-test v0.0.0-20260909113857-70ed2c396398/go.mod h1:9UbmAwOuJLoEoF6WMin67XElZyVnU2OIc1XLM3UxsPQ=
 github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a h1:Gx3vQONoXKE+juMtkqRG7HLg8+YeZ+ExrYzGkHw2EwQ=
 github.com/sikalabsx/gocurl v0.0.0-20260304004350-8838a553586a/go.mod h1:v8ztWh9G3ojQqaeanLJI1AAFUoBmD5LlRAz0DyK9/ic=
 github.com/sikalabsx/gohost v0.0.0-20260304005520-4acdbf847c76 h1:9stSIMVUsMHf9NdQL85NmUb9Lveez4LSpwikyY3dC1M=

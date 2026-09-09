@@ -101,6 +101,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/vault_k8s_get"
 	_ "github.com/sikalabs/slr/cmd/version"
 	_ "github.com/sikalabs/slr/cmd/vibe"
+	hello_world_v4_cmd "github.com/sikalabsx/go-scripts-test/hello-world-v4/pkg/cmd"
 	"github.com/spf13/cobra"
 )
 
@@ -116,6 +117,9 @@ func Execute() {
 	} else {
 		// Otherwise, execute the root command which includes "training" as a subcommand
 		root.Cmd.AddCommand(training.Cmd)
+
+		// external commands
+		root.Cmd.AddCommand(hello_world_v4_cmd.Cmd)
 		cobra.CheckErr(root.Cmd.Execute())
 	}
 }
