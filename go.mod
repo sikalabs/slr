@@ -26,7 +26,7 @@ require (
 	github.com/prometheus/client_golang v1.24.1
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
-	github.com/sikalabs/go-scripts v0.0.0-20260909115609-32c85b2187a3
+	github.com/sikalabs/go-scripts v0.0.0-20260909143150-b8dc67575847
 	github.com/sikalabs/install-slu v0.1.0
 	github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8
 	github.com/sikalabs/sikalabs-crypt-go v0.0.0-20251105174759-2ff0fb3fb552
@@ -192,7 +192,6 @@ require (
 	gopkg.in/go-jose/go-jose.v2 v2.6.3 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gotest.tools/v3 v3.5.2 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20260721132016-d427ff9ee9ad // indirect
 	k8s.io/utils v0.0.0-20260626114624-be93311217bd // indirect

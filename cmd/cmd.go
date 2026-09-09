@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	mirror_container_registry_cmd "github.com/sikalabs/go-scripts/mirror-container-registry/pkg/cmd"
+	s3_upload_file_cmd "github.com/sikalabs/go-scripts/s3-upload-file/pkg/cmd"
 	_ "github.com/sikalabs/slr/cmd/acme_dns"
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/azure"
@@ -104,7 +105,6 @@ import (
 	_ "github.com/sikalabs/slr/cmd/version"
 	_ "github.com/sikalabs/slr/cmd/vibe"
 	hello_world_v4_cmd "github.com/sikalabsx/go-scripts-test/hello-world-v4/pkg/cmd"
-	s3_upload_file_cmd "github.com/sikalabsx/go-scripts-test/s3-upload-file/pkg/cmd"
 	"github.com/spf13/cobra"
 )
 

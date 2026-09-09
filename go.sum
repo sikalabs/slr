@@ -517,8 +517,8 @@ github.com/shoenig/test v1.7.0/go.mod h1:UxJ6u/x2v/TNs/LoLxBNJRV9DiwBBKYxXSyczsB
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/sikalabs/dogsay v0.2.0 h1:I/45sWJX/nl8++gkkkzbtSkBNG9OVU4HKd99BmBW1sU=
 github.com/sikalabs/dogsay v0.2.0/go.mod h1:1IhR4v0qIYn925rFuu4TriYbDJxra8H1utFOlmqkhhw=
-github.com/sikalabs/go-scripts v0.0.0-20260909115609-32c85b2187a3 h1:4+I4r9l78WYjsh1vM5pBjFL/RJ8daRML0fTMnk2Ykx4=
-github.com/sikalabs/go-scripts v0.0.0-20260909115609-32c85b2187a3/go.mod h1:XpxPUPERSk4PNzcFz4cevc834HQKT9DOgYTMb+DhdaM=
+github.com/sikalabs/go-scripts v0.0.0-20260909143150-b8dc67575847 h1:5aFRW6i554qnayjsQ/5IAxKTE/oecq2v/Dz59e1goHc=
+github.com/sikalabs/go-scripts v0.0.0-20260909143150-b8dc67575847/go.mod h1:PTeuSatxmREm5QhRH9WXw4K2Z21sG2FePgrXAC1RKJU=
 github.com/sikalabs/install-slu v0.1.0 h1:QSKPLVEUUSsOutDXAgnUDci1w8Fy5tr80jOCA+Blcxg=
 github.com/sikalabs/install-slu v0.1.0/go.mod h1:EzGbW6O9GBNMGDXs3juAqTw33Higj0lKLz3UljtaLOI=
 github.com/sikalabs/scr v0.0.0-20260204224902-04923533d0e8 h1:MxuP3GjTU4c82FHw7CK+Tl71ywHVwh5JtWZyKjUMFwU=
