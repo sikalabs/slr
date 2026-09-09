@@ -6,6 +6,7 @@ import (
 
 	mirror_container_registry_cmd "github.com/sikalabs/go-scripts/mirror-container-registry/pkg/cmd"
 	s3_upload_file_cmd "github.com/sikalabs/go-scripts/s3-upload-file/pkg/cmd"
+	upload_sikalabs_bin_cmd "github.com/sikalabs/go-scripts/upload-sikalabs-bin/pkg/cmd"
 	_ "github.com/sikalabs/slr/cmd/acme_dns"
 	_ "github.com/sikalabs/slr/cmd/allocate_100mb"
 	_ "github.com/sikalabs/slr/cmd/azure"
@@ -125,6 +126,7 @@ func Execute() {
 		root.Cmd.AddCommand(hello_world_v4_cmd.Cmd)
 		root.Cmd.AddCommand(mirror_container_registry_cmd.Cmd)
 		root.Cmd.AddCommand(s3_upload_file_cmd.Cmd)
+		root.Cmd.AddCommand(upload_sikalabs_bin_cmd.Cmd)
 		cobra.CheckErr(root.Cmd.Execute())
 	}
 }
