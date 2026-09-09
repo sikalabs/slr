@@ -9,6 +9,9 @@ symlink:
 build-linux-amd64:
 	GOOS=linux GOARCH=amd64 go build -o slr-linux-amd64
 
+build-darwin-arm64:
+	GOOS=darwin GOARCH=arm64 go build -o slr-darwin-arm64
+
 scp-to:
 ifndef TO
 	$(error TO is undefined, use 'make build-and-scp TO=root@server.example.com')

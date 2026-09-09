@@ -18,6 +18,7 @@ Makefile.local.mk
 # Go
 slr
 slr-linux-amd64
+slr-darwin-arm64
 /training-cli
 /training-cli-linux-amd64
 *.exe

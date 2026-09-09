@@ -74,6 +74,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/scan_network"
 	_ "github.com/sikalabs/slr/cmd/scr"
 	_ "github.com/sikalabs/slr/cmd/servers_md"
+	_ "github.com/sikalabs/slr/cmd/sikalabs_upload_bin"
 	_ "github.com/sikalabs/slr/cmd/static_hash_tagger"
 	_ "github.com/sikalabs/slr/cmd/stream_kubernetes_events_to_mongodb"
 	_ "github.com/sikalabs/slr/cmd/suffix"
