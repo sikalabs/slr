@@ -48,13 +48,20 @@ var Cmd = &cobra.Command{
 }
 
 func installK3sCluster(domain, name string) {
-	fmt.Printf("Installing k3s (without traefik) with tls-san %s ...\n", domain)
-	cmd := exec.Command("sh", "-c", "curl -sfL https://get.k3s.io | sh -s - server --disable traefik --tls-san "+domain)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		log.Fatalf("Failed to install k3s: %v", err)
+	// Install tools before k3s, so k3s does not create its own kubectl symlink
+	for _, tool := range []string{"kubectl", "helm", "k9s"} {
+		fmt.Printf("Installing %s ...\n", tool)
+		runCommand("slu", "ib", tool)
 	}
+
+	fmt.Println("Creating symlink /usr/local/bin/k -> /usr/local/bin/kubectl ...")
+	os.Remove("/usr/local/bin/k")
+	if err := os.Symlink("/usr/local/bin/kubectl", "/usr/local/bin/k"); err != nil {
+		log.Fatalf("Failed to create symlink /usr/local/bin/k: %v", err)
+	}
+
+	fmt.Printf("Installing k3s (without traefik) with tls-san %s ...\n", domain)
+	runCommand("sh", "-c", "curl -sfL https://get.k3s.io | sh -s - server --disable traefik --tls-san "+domain)
 
 	config, err := clientcmd.LoadFromFile(K3sKubeconfigPath)
 	if err != nil {
@@ -94,4 +101,13 @@ func installK3sCluster(domain, name string) {
 		log.Fatalf("Failed to write %s: %v", defaultKubeconfigPath, err)
 	}
 	fmt.Printf("Kubeconfig copied to %s\n", defaultKubeconfigPath)
+}
+
+func runCommand(name string, args ...string) {
+	cmd := exec.Command(name, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		log.Fatalf("Failed to run %s %v: %v", name, args, err)
+	}
 }
