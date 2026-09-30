@@ -14,7 +14,16 @@ import (
 
 func init() {
 	training.Cmd.AddCommand(Cmd)
+	Cmd.Flags().StringVarP(
+		&FlagFile,
+		"file",
+		"f",
+		"",
+		"Path to kubeconfig file (default: $KUBECONFIG or ~/.kube/config)",
+	)
 }
+
+var FlagFile string
 
 var Cmd = &cobra.Command{
 	Use:     "save-kubeconfig",
@@ -22,7 +31,7 @@ var Cmd = &cobra.Command{
 	Aliases: []string{"save-k"},
 	Args:    cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		err := saveKubeconfigToStorage()
+		err := saveKubeconfigToStorage(FlagFile)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
@@ -31,7 +40,7 @@ var Cmd = &cobra.Command{
 	},
 }
 
-func saveKubeconfigToStorage() error {
+func saveKubeconfigToStorage(file string) error {
 	hostname, err := os.Hostname()
 	if err != nil {
 		return fmt.Errorf("failed to get hostname: %w", err)
@@ -40,6 +49,9 @@ func saveKubeconfigToStorage() error {
 	kubeconfigPath := filepath.Join(os.Getenv("HOME"), ".kube", "config")
 	if envPath := os.Getenv("KUBECONFIG"); envPath != "" {
 		kubeconfigPath = envPath
+	}
+	if file != "" {
+		kubeconfigPath = file
 	}
 
 	kubeconfigContent, err := os.ReadFile(kubeconfigPath)
