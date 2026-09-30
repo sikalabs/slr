@@ -38,6 +38,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/gohost"
 	_ "github.com/sikalabs/slr/cmd/gojekyll"
 	_ "github.com/sikalabs/slr/cmd/install_du_gitlab_tls_update"
+	_ "github.com/sikalabs/slr/cmd/install_k3s_cluster"
 	_ "github.com/sikalabs/slr/cmd/install_restart_eno1_systemd"
 	_ "github.com/sikalabs/slr/cmd/kubeconfig_from_vault"
 	_ "github.com/sikalabs/slr/cmd/kubernetes_homepage"
