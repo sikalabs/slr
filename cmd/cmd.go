@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
+	install_sikalabs_bin_cmd "github.com/sikalabs/go-scripts/install-sikalabs-bin/pkg/cmd"
 	mirror_container_registry_cmd "github.com/sikalabs/go-scripts/mirror-container-registry/pkg/cmd"
 	s3_upload_file_cmd "github.com/sikalabs/go-scripts/s3-upload-file/pkg/cmd"
 	upload_sikalabs_bin_cmd "github.com/sikalabs/go-scripts/upload-sikalabs-bin/pkg/cmd"
@@ -127,6 +128,7 @@ func Execute() {
 		root.Cmd.AddCommand(mirror_container_registry_cmd.Cmd)
 		root.Cmd.AddCommand(s3_upload_file_cmd.Cmd)
 		root.Cmd.AddCommand(upload_sikalabs_bin_cmd.Cmd)
+		root.Cmd.AddCommand(install_sikalabs_bin_cmd.Cmd)
 		cobra.CheckErr(root.Cmd.Execute())
 	}
 }
