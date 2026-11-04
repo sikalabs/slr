@@ -1,8 +1,12 @@
 package add_claude_md_from_sikalabs_slu
 
 import (
+	"fmt"
+	"log"
+	"os"
+	"os/exec"
+
 	"github.com/sikalabs/slr/cmd/ondrejsika"
-	"github.com/sikalabs/slu/utils/exec_utils"
 	"github.com/spf13/cobra"
 )
 
@@ -12,16 +16,29 @@ func init() {
 
 var Cmd = &cobra.Command{
 	Use:     "add-claude-md-from-sikalabs-slu",
-	Short:   "Add CLAUDE.md from sikalabs/slu repository",
+	Short:   "Deprecated: Use 'slu os add-claude-md-from-sikalabs-slu' instead",
 	Aliases: []string{"add-claude-md"},
 	Args:    cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
-		addClaudeMdFromSikalasbSlu()
+		fmt.Println(`##############################################################################
+#                                                                            #
+#                                                                            #
+#   Dont use ` + "`slr os add-claude-md-from-sikalabs-slu`" + `.                       #
+#   Use ` + "`slu os add-claude-md-from-sikalabs-slu`" + `                             #
+#                                                                            #
+#                                                                            #
+##############################################################################`)
+		run("slu", "os", "add-claude-md-from-sikalabs-slu")
 	},
 }
 
-func addClaudeMdFromSikalasbSlu() {
-	exec_utils.ExecOut("curl", "-fsSL", "https://raw.githubusercontent.com/sikalabs/slu/refs/heads/master/CLAUDE.md", "-o", "CLAUDE.md")
-	exec_utils.ExecOut("git", "add", "CLAUDE.md")
-	exec_utils.ExecOut("git", "commit", "-m", "feat(CLAUDE): Add CLAUDE.md from sikalabs/slu")
+func run(name string, args ...string) {
+	cmd := exec.Command(name, args...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		log.Fatalf("Error running %s: %v", name, err)
+	}
 }
