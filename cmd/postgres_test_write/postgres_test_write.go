@@ -2,6 +2,7 @@ package postgres_test_write
 
 import (
 	"crypto/rand"
+	"fmt"
 	"log"
 	"time"
 
@@ -50,11 +51,15 @@ func postgresTestWrite(uri string, sizeMB int, sleep int, count int) {
 			Size: len(data),
 			Data: data,
 		}
+		progress := ""
+		if count > 0 {
+			progress = fmt.Sprintf("[%d/%d %d%%] ", i, count, i*100/count)
+		}
 		start := time.Now()
 		if err := db.Create(&row).Error; err != nil {
-			log.Printf("WRITE ERROR: %v\n", err)
+			log.Printf("%sWRITE ERROR: %v\n", progress, err)
 		} else {
-			log.Printf("WRITE OK id=%d size=%dMB (%s)\n", row.ID, sizeMB, time.Since(start).Round(time.Millisecond))
+			log.Printf("%sWRITE OK id=%d size=%dMB (%s)\n", progress, row.ID, sizeMB, time.Since(start).Round(time.Millisecond))
 		}
 		if count == 0 || i < count {
 			time.Sleep(time.Duration(sleep) * time.Second)
