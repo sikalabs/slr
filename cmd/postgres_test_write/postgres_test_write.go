@@ -37,7 +37,7 @@ var Cmd = &cobra.Command{
 }
 
 func postgresTestWrite(uri string, sizeMB int, sleep int, count int) {
-	db, err := postgres_test_utils.Connect(uri)
+	db, err := postgres_test_utils.Connect(uri, &postgres_test_utils.PostgresTestRow{})
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -34,7 +34,7 @@ var Cmd = &cobra.Command{
 }
 
 func postgresTestRead(uri string, sleep int, readData bool) {
-	db, err := postgres_test_utils.Connect(uri)
+	db, err := postgres_test_utils.Connect(uri, &postgres_test_utils.PostgresTestRow{})
 	if err != nil {
 		log.Fatalln(err)
 	}
