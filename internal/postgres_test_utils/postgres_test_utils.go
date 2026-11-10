@@ -15,6 +15,17 @@ type Message struct {
 	Message   string
 }
 
+type Counter struct {
+	ID        uint64    `gorm:"primaryKey"`
+	CreatedAt time.Time `gorm:"index"`
+	Prefix    string
+	Counter   uint64
+}
+
+func (Counter) TableName() string {
+	return "counter"
+}
+
 type PostgresTestRow struct {
 	ID        uint64    `gorm:"primaryKey"`
 	CreatedAt time.Time `gorm:"index"`
