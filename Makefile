@@ -49,6 +49,19 @@ build-and-scp-labs:
 	@make scp-to TO=root@lab19.sikademo.com
 	@make scp-to TO=root@lab20.sikademo.com
 
+docker-build-and-push-wip-image:
+	slr next-dev-docker-tag --key wip
+	docker build . \
+		--target final_with_ca_certificates \
+		-t ghcr.io/sikalabsregistry/wip/slr:`slr next-dev-docker-tag --read --key wip` \
+		-t ghcr.io/sikalabsregistry/wip/slr
+
+		docker push ghcr.io/sikalabsregistry/wip/slr:`slr next-dev-docker-tag --read --key wip`
+		docker push ghcr.io/sikalabsregistry/wip/slr
+
+		@echo Sucessfully pushed: ghcr.io/sikalabsregistry/wip/slr
+		@echo Sucessfully pushed: ghcr.io/sikalabsregistry/wip/slr:`slr next-dev-docker-tag --read --key wip`
+
 release:
 	git pull
 	slu go-code version-bump --auto --tag
