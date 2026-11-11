@@ -9,10 +9,10 @@ symlink:
 	ln -sf $(shell pwd)/slr $(shell dirname $(shell which slr))/training-cli
 
 build-linux-amd64:
-	GOOS=linux GOARCH=amd64 go build -o slr-linux-amd64
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o slr-linux-amd64 -trimpath -ldflags="-s -w"
 
 build-darwin-arm64:
-	GOOS=darwin GOARCH=arm64 go build -o slr-darwin-arm64
+	CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -o slr-darwin-arm64 -trimpath -ldflags="-s -w"
 
 scp-to:
 ifndef TO
