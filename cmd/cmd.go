@@ -52,6 +52,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/next_dev_docker_tag"
 	_ "github.com/sikalabs/slr/cmd/nothing"
 	_ "github.com/sikalabs/slr/cmd/oidc_device_login"
+	_ "github.com/sikalabs/slr/cmd/oidc_device_login_federated"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_ad_to_readme"
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/add_claude_md_from_sikalabs_slu"
