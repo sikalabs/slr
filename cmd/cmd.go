@@ -67,6 +67,7 @@ import (
 	_ "github.com/sikalabs/slr/cmd/ondrejsika/telegram_ci"
 	_ "github.com/sikalabs/slr/cmd/otp"
 	_ "github.com/sikalabs/slr/cmd/parse_jwt"
+	_ "github.com/sikalabs/slr/cmd/postgres_test_info"
 	_ "github.com/sikalabs/slr/cmd/postgres_test_read"
 	_ "github.com/sikalabs/slr/cmd/postgres_test_read_counter"
 	_ "github.com/sikalabs/slr/cmd/postgres_test_read_message"
