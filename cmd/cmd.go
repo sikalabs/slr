@@ -16,6 +16,8 @@ import (
 	_ "github.com/sikalabs/slr/cmd/bin_to_oci"
 	_ "github.com/sikalabs/slr/cmd/break_line"
 	_ "github.com/sikalabs/slr/cmd/check_before_rke2_install"
+	_ "github.com/sikalabs/slr/cmd/check_cve"
+	_ "github.com/sikalabs/slr/cmd/check_cve/cve_2026_119618"
 	_ "github.com/sikalabs/slr/cmd/check_docker_credentials"
 	_ "github.com/sikalabs/slr/cmd/client_ip_web_server"
 	_ "github.com/sikalabs/slr/cmd/copy_from_cloud"
