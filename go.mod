@@ -25,6 +25,7 @@ require (
 	github.com/osteele/gojekyll v0.3.1
 	github.com/pquerna/otp v1.5.0
 	github.com/prometheus/client_golang v1.24.1
+	github.com/rabbitmq/amqp091-go v1.17.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/shirou/gopsutil/v3 v3.24.5
 	github.com/sikalabs/go-scripts v0.0.0-20261026214316-6c0649e386a4

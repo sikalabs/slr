@@ -82,6 +82,8 @@ import (
 	_ "github.com/sikalabs/slr/cmd/postgres_test_write"
 	_ "github.com/sikalabs/slr/cmd/postgres_test_write_counter"
 	_ "github.com/sikalabs/slr/cmd/postgres_test_write_message"
+	_ "github.com/sikalabs/slr/cmd/rabbitmq_consumer"
+	_ "github.com/sikalabs/slr/cmd/rabbitmq_producer"
 	_ "github.com/sikalabs/slr/cmd/redis_set_large_data"
 	_ "github.com/sikalabs/slr/cmd/render_template"
 	_ "github.com/sikalabs/slr/cmd/render_templates"
