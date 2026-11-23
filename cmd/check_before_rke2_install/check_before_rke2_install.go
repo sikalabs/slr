@@ -11,7 +11,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/sikalabs/slr/cmd/root"
@@ -32,6 +31,10 @@ var Cmd = &cobra.Command{
 	Short: "Check if this server meets all requirements for RKE2 node installation",
 	Args:  cobra.NoArgs,
 	Run: func(c *cobra.Command, args []string) {
+		if runtime.GOOS != "linux" {
+			fmt.Fprintf(os.Stderr, "check-before-rke2-install works only on Linux (current OS: %s)\n", runtime.GOOS)
+			os.Exit(1)
+		}
 		if FlagRole != "server" && FlagRole != "agent" {
 			fmt.Fprintln(os.Stderr, "--role must be server or agent")
 			os.Exit(1)
@@ -215,12 +218,12 @@ func checkDisk(c *checker) {
 		}
 		path = path[:i]
 	}
-	var st syscall.Statfs_t
-	if err := syscall.Statfs(path, &st); err != nil {
+	avail, err := diskAvailable(path)
+	if err != nil {
 		c.report(statusWarn, "Disk space", fmt.Sprintf("cannot stat %s: %s", path, err))
 		return
 	}
-	gb := float64(uint64(st.Bavail)*uint64(st.Bsize)) / (1 << 30)
+	gb := float64(avail) / (1 << 30)
 	msg := fmt.Sprintf("%.1fGB free on %s (/var/lib/rancher)", gb, path)
 	switch {
 	case gb < 20:
